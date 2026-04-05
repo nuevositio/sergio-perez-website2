@@ -17,6 +17,14 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    name: "Metalúrgica Luis Loza",
+    url: "https://metalurgicaluisloza.uy",
+    display: "metalurgicaluisloza.uy",
+    category: "Industria & empresa",
+    description: "Sitio institucional para empresa metalúrgica con historia en Uruguay.",
+    screenshot: "/images/proyectos/luisloza.jpg",
+  },
+  {
     name: "Milagus",
     url: "https://www.milagus.uy",
     display: "milagus.uy",
@@ -25,12 +33,28 @@ const projects = [
     screenshot: "/images/proyectos/milagus.jpg",
   },
   {
+    name: "Periódico Centenario",
+    url: "https://periodicocentenario.com.uy",
+    display: "periodicocentenario.com.uy",
+    category: "Medios & periodismo",
+    description: "Plataforma digital de noticias con foco en la agenda cultural y social.",
+    screenshot: "/images/proyectos/centenario.jpg",
+  },
+  {
     name: "Empresa Bonjour",
     url: "https://www.empresabonjour.com.uy",
     display: "empresabonjour.com.uy",
     category: "Empresa & servicios",
     description: "Sitio institucional y comunicación digital para empresa uruguaya.",
     screenshot: "/images/proyectos/bonjour.jpg",
+  },
+  {
+    name: "Perfiles",
+    url: "https://perfiles.uy",
+    display: "perfiles.uy",
+    category: "Medios & contenido",
+    description: "Portal de entrevistas y perfiles de personajes de la cultura uruguaya.",
+    screenshot: "/images/proyectos/perfiles.jpg",
   },
   {
     name: "Mac Travel",
@@ -63,30 +87,6 @@ const projects = [
     category: "Comercio & marca",
     description: "Plataforma web para marca comercial uruguaya con identidad propia.",
     screenshot: "/images/proyectos/napilotti.jpg",
-  },
-  {
-    name: "Periódico Centenario",
-    url: "https://periodicocentenario.com.uy",
-    display: "periodicocentenario.com.uy",
-    category: "Medios & periodismo",
-    description: "Plataforma digital de noticias con foco en la agenda cultural y social.",
-    screenshot: "/images/proyectos/centenario.jpg",
-  },
-  {
-    name: "Perfiles",
-    url: "https://perfiles.uy",
-    display: "perfiles.uy",
-    category: "Medios & contenido",
-    description: "Portal de entrevistas y perfiles de personajes de la cultura uruguaya.",
-    screenshot: "/images/proyectos/perfiles.jpg",
-  },
-  {
-    name: "Metalúrgica Luis Loza",
-    url: "https://metalurgicaluisloza.uy",
-    display: "metalurgicaluisloza.uy",
-    category: "Industria & empresa",
-    description: "Sitio institucional para empresa metalúrgica con historia en Uruguay.",
-    screenshot: "/images/proyectos/luisloza.jpg",
   },
 ];
 
