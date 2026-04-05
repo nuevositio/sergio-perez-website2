@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPublishedPostBySlug } from "@/features/columns/queries";
 import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/json-ld";
+import { ShareButtons } from "@/components/share-buttons";
 
 type Params = {
   params: Promise<{ slug: string }>;
@@ -124,10 +125,14 @@ export default async function ColumnaDetallePage({ params }: Params) {
         ))}
       </div>
 
-      <footer className="mt-12 border-t border-zinc-200 pt-8">
+      <footer className="mt-12 space-y-6 border-t border-zinc-200 pt-8">
+        <ShareButtons
+          url={`${BASE}/columnas/${post.slug}`}
+          title={post.title}
+        />
         <Link
           href="/columnas"
-          className="text-sm font-semibold text-zinc-600 hover:text-zinc-900"
+          className="inline-block text-sm font-semibold text-zinc-600 hover:text-zinc-900"
         >
           ← Volver a columnas
         </Link>
