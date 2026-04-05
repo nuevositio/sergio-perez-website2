@@ -1,77 +1,158 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Proyectos — Trabajo Seleccionado",
+  title: "Proyectos — Desarrollo Web en Uruguay",
   description:
-    "Proyectos seleccionados de Sergio Pérez: ciclos culturales, columnas de opinión, plataformas web y gestión de fondos públicos en Uruguay.",
+    "Portfolio de sitios web desarrollados por Sergio Pérez: marcas personales, empresas, turismo e industria en Uruguay.",
   alternates: { canonical: "https://www.sergioperez.uy/proyectos" },
   openGraph: {
     title: "Proyectos — Sergio Pérez",
     description:
-      "Ciclos culturales, columnas de opinión y plataformas web con impacto real.",
+      "Portfolio de sitios web desarrollados en Uruguay: marcas, empresas y plataformas digitales.",
     url: "https://www.sergioperez.uy/proyectos",
     type: "website",
   },
 };
 
+const SCREENSHOT = "https://image.thum.io/get/width/1200/crop/750/noanimate/";
+
 const projects = [
   {
-    category: "Comunicación",
-    title: "Columnas culturales en medios especializados",
-    description:
-      "Producción regular de columnas de opinión e investigación sobre cultura, identidad y política cultural en Uruguay y la región.",
-    tags: ["Periodismo", "Cultura", "Opinión"],
+    name: "Milagus",
+    url: "https://www.milagus.uy",
+    display: "milagus.uy",
+    category: "Marca personal",
+    description: "Identidad digital y plataforma web para marca uruguaya.",
   },
   {
-    category: "Desarrollo web",
-    title: "Plataformas de marca personal",
-    description:
-      "Diseño y desarrollo de sitios profesionales con Next.js para gestores culturales, comunicadores y profesionales creativos.",
-    tags: ["Next.js", "TypeScript", "Marca personal"],
+    name: "Empresa Bonjour",
+    url: "https://www.empresabonjour.com.uy",
+    display: "empresabonjour.com.uy",
+    category: "Empresa & servicios",
+    description: "Sitio institucional y comunicación digital para empresa uruguaya.",
   },
   {
-    category: "Gestión cultural",
-    title: "Ciclos y programación cultural independiente",
-    description:
-      "Diseño, producción y evaluación de ciclos culturales con impacto comunitario, incluyendo gestión de presupuesto y convocatorias públicas.",
-    tags: ["Ciclos", "Fondos", "Gestión"],
+    name: "Mac Travel",
+    url: "https://www.mactravel.com.uy",
+    display: "mactravel.com.uy",
+    category: "Turismo & viajes",
+    description: "Plataforma web para agencia de viajes con catálogo de destinos.",
+  },
+  {
+    name: "Cata Santos",
+    url: "https://www.catasantos.com",
+    display: "catasantos.com",
+    category: "Marca personal",
+    description: "Presencia digital para marca personal con enfoque en contenido.",
+  },
+  {
+    name: "Tecnidiesel",
+    url: "https://www.tecnidiesel.com.uy",
+    display: "tecnidiesel.com.uy",
+    category: "Industria & servicios",
+    description: "Sitio profesional para empresa especializada en mecánica diesel.",
+  },
+  {
+    name: "Napilotti",
+    url: "https://napilotti.com.uy",
+    display: "napilotti.com.uy",
+    category: "Comercio & marca",
+    description: "Plataforma web para marca comercial uruguaya con identidad propia.",
   },
 ];
 
 export default function ProyectosPage() {
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
+      {/* Header */}
       <section className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Proyectos</p>
-        <h1 className="text-4xl font-semibold text-zinc-900">Trabajo seleccionado</h1>
+        <h1 className="text-4xl font-semibold text-zinc-900">Sitios desarrollados</h1>
         <p className="max-w-2xl text-base leading-relaxed text-zinc-600">
-          Una muestra de proyectos en los que intervine como gestor, comunicador o desarrollador.
+          Una selección de plataformas web que diseñé y desarrollé para marcas, empresas y profesionales en Uruguay.
+          Pasá el cursor para ver cada proyecto en color.
         </p>
       </section>
 
-      <div className="grid gap-5 md:grid-cols-2">
+      {/* Gallery */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <article
-            key={project.title}
-            className="flex flex-col rounded-xl border border-zinc-200 bg-white p-6 shadow-sm"
+          <a
+            key={project.name}
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:border-zinc-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
           >
-            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
-              {project.category}
-            </p>
-            <h2 className="mt-2 text-lg font-semibold text-zinc-900">{project.title}</h2>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600">{project.description}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600"
-                >
-                  {tag}
+            {/* Screenshot */}
+            <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${SCREENSHOT}${project.url}`}
+                alt={`Captura de pantalla de ${project.name}`}
+                className="h-full w-full object-cover object-top transition-all duration-500 ease-out grayscale group-hover:grayscale-0 group-hover:scale-[1.04]"
+                loading="lazy"
+              />
+              {/* Overlay sutil */}
+              <div className="absolute inset-0 bg-zinc-900/5 group-hover:bg-transparent transition-colors duration-500" />
+              {/* Badge "Visitar" */}
+              <div className="absolute bottom-3 right-3 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-lg backdrop-blur-sm">
+                  Visitar sitio
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
+                    <path d="M7 17L17 7M17 7H7M17 7v10" />
+                  </svg>
                 </span>
-              ))}
+              </div>
             </div>
-          </article>
+
+            {/* Footer de la card */}
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
+                    {project.category}
+                  </p>
+                  <h2 className="mt-0.5 text-base font-semibold text-zinc-900 truncate">
+                    {project.name}
+                  </h2>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-500">
+                    {project.description}
+                  </p>
+                </div>
+              </div>
+              <p className="mt-3 flex items-center gap-1 text-xs text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3 shrink-0">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12a15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                {project.display}
+              </p>
+            </div>
+          </a>
         ))}
+      </div>
+
+      {/* CTA */}
+      <div className="rounded-2xl border border-zinc-200 bg-white p-8 text-center">
+        <p className="text-sm font-semibold text-zinc-500">¿Querés tu sitio web?</p>
+        <h2 className="mt-2 text-xl font-semibold text-zinc-900">
+          Desarrollamos tu presencia digital desde cero.
+        </h2>
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <a
+            href="/cotizacion"
+            className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700"
+          >
+            Cotizá tu proyecto
+          </a>
+          <a
+            href="/contacto"
+            className="rounded-lg border border-zinc-300 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-800 transition hover:bg-zinc-50"
+          >
+            Contactame
+          </a>
+        </div>
       </div>
     </div>
   );
