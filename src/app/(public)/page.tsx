@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedPosts } from "@/features/columns/queries";
 import { PersonJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
+import TypewriterText from "@/components/typewriter-text";
 
 export const metadata: Metadata = {
   title: "Sergio Pérez — Gestor Cultural, Comunicador y Desarrollador Web en Uruguay",
@@ -52,7 +53,14 @@ export default async function HomePage() {
             Gestor cultural · Comunicador · Desarrollador
           </p>
           <h1 className="text-4xl font-semibold leading-[1.15] text-zinc-900 md:text-5xl">
-            Gestión cultural, comunicación y desarrollo web con criterio profesional.
+            <TypewriterText
+              texts={[
+                "Gestión cultural con criterio profesional.",
+                "Comunicación que construye audiencias.",
+                "Desarrollo web con identidad propia.",
+                "Proyectos culturales con impacto real.",
+              ]}
+            />
           </h1>
           <p className="text-base leading-relaxed text-zinc-600 md:text-lg">
             Trabajo en la intersección entre cultura, narrativa y tecnología para construir
