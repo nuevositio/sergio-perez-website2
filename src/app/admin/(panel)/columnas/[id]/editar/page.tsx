@@ -3,6 +3,8 @@ import { getCategories, getPostById } from "@/features/columns/queries";
 import { PostForm } from "@/features/columns/components/post-form";
 import { updatePostAction } from "@/features/columns/actions";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   params: Promise<{ id: string }>;
 };

@@ -3,6 +3,8 @@ import { createPostAction } from "@/features/columns/actions";
 import { PostForm } from "@/features/columns/components/post-form";
 import { getCategories } from "@/features/columns/queries";
 
+export const dynamic = "force-dynamic";
+
 export default async function NuevaColumnaPage() {
   const categories = await getCategories();
 

@@ -4,6 +4,8 @@ import { PostStatusBadge } from "@/features/columns/components/post-status-badge
 import { getAdminPosts } from "@/features/columns/queries";
 import { Button } from "@/components/ui/button";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminColumnasPage() {
   const posts = await getAdminPosts();
 
