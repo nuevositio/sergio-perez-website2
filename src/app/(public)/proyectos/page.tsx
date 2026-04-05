@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,8 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-const SCREENSHOT = "https://image.thum.io/get/width/1200/crop/750/noanimate/";
-
 const projects = [
   {
     name: "Milagus",
@@ -23,6 +22,7 @@ const projects = [
     display: "milagus.uy",
     category: "Marca personal",
     description: "Identidad digital y plataforma web para marca uruguaya.",
+    screenshot: "/images/proyectos/milagus.jpg",
   },
   {
     name: "Empresa Bonjour",
@@ -30,6 +30,7 @@ const projects = [
     display: "empresabonjour.com.uy",
     category: "Empresa & servicios",
     description: "Sitio institucional y comunicación digital para empresa uruguaya.",
+    screenshot: "/images/proyectos/bonjour.jpg",
   },
   {
     name: "Mac Travel",
@@ -37,6 +38,7 @@ const projects = [
     display: "mactravel.com.uy",
     category: "Turismo & viajes",
     description: "Plataforma web para agencia de viajes con catálogo de destinos.",
+    screenshot: "/images/proyectos/mactravel.jpg",
   },
   {
     name: "Cata Santos",
@@ -44,6 +46,7 @@ const projects = [
     display: "catasantos.com",
     category: "Marca personal",
     description: "Presencia digital para marca personal con enfoque en contenido.",
+    screenshot: null,
   },
   {
     name: "Tecnidiesel",
@@ -51,6 +54,7 @@ const projects = [
     display: "tecnidiesel.com.uy",
     category: "Industria & servicios",
     description: "Sitio profesional para empresa especializada en mecánica diesel.",
+    screenshot: "/images/proyectos/tecnidiesel.jpg",
   },
   {
     name: "Napilotti",
@@ -58,6 +62,7 @@ const projects = [
     display: "napilotti.com.uy",
     category: "Comercio & marca",
     description: "Plataforma web para marca comercial uruguaya con identidad propia.",
+    screenshot: "/images/proyectos/napilotti.jpg",
   },
 ];
 
@@ -86,13 +91,27 @@ export default function ProyectosPage() {
           >
             {/* Screenshot */}
             <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${SCREENSHOT}${project.url}`}
-                alt={`Captura de pantalla de ${project.name}`}
-                className="h-full w-full object-cover object-top transition-all duration-500 ease-out grayscale group-hover:grayscale-0 group-hover:scale-[1.04]"
-                loading="lazy"
-              />
+              {project.screenshot ? (
+                <Image
+                  src={project.screenshot}
+                  alt={`Captura de pantalla de ${project.name}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-top transition-all duration-500 ease-out grayscale group-hover:grayscale-0 group-hover:scale-[1.04]"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 transition-all duration-500 group-hover:from-zinc-50 group-hover:to-zinc-100">
+                  <div className="text-center">
+                    <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12a15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                    </div>
+                    <p className="text-xs font-medium text-zinc-500">{project.display}</p>
+                  </div>
+                </div>
+              )}
               {/* Overlay sutil */}
               <div className="absolute inset-0 bg-zinc-900/5 group-hover:bg-transparent transition-colors duration-500" />
               {/* Badge "Visitar" */}
