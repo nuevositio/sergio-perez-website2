@@ -42,11 +42,11 @@ const projects = [
   },
   {
     name: "Cata Santos",
-    url: "https://www.catasantos.com",
-    display: "catasantos.com",
+    url: "https://catasantoslu.com",
+    display: "catasantoslu.com",
     category: "Marca personal",
     description: "Presencia digital para marca personal con enfoque en contenido.",
-    screenshot: null,
+    screenshot: "/images/proyectos/catasantos.jpg",
   },
   {
     name: "Tecnidiesel",
