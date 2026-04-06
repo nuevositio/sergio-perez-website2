@@ -117,6 +117,7 @@ export async function createPostAction(formData: FormData) {
     throw new Error(`No se pudo guardar la columna. Detalle técnico: ${detail}`);
   }
 
+  revalidatePath("/");
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
   redirect("/admin/columnas?success=created");
@@ -160,6 +161,7 @@ export async function updatePostAction(postId: string, formData: FormData) {
     throw new Error(`No se pudo actualizar la columna. Detalle técnico: ${detail}`);
   }
 
+  revalidatePath("/");
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
   revalidatePath(`/columnas/${current.slug}`);

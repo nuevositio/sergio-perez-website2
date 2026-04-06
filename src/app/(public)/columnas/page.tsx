@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedPosts } from "@/features/columns/queries";
 
+export const revalidate = 3600; // Revalida cada hora
+
 export const metadata: Metadata = {
   title: "Columnas — Escritura y Opinión",
   description: "Columnas de opinión e investigación sobre cultura, identidad, política cultural y comunicación estratégica en Uruguay y la región.",

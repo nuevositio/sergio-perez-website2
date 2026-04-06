@@ -36,6 +36,8 @@ const areas = [
   },
 ];
 
+export const revalidate = 3600; // Revalida cada hora
+
 export default async function HomePage() {
   const latestPosts = await getPublishedPosts()
     .then((posts) => posts.slice(0, 3))
