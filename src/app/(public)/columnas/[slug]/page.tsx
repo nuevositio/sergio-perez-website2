@@ -115,7 +115,7 @@ export default async function ColumnaDetallePage({ params }: Params) {
         <img
           src={post.featuredImage}
           alt={post.title}
-          className="my-8 w-full rounded-xl border border-zinc-200 object-cover"
+          className="my-8 w-full rounded-xl border border-zinc-200 object-cover grayscale"
         />
       ) : null}
 
