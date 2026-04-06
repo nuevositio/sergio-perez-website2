@@ -21,19 +21,37 @@ async function requireAdminSession() {
   }
 }
 
-async function uploadFeaturedImage(file: File | null | undefined) {
+async function uploadFeaturedImage(file: File | null | undefined): Promise<string | null> {
   if (!file || file.size === 0) return null;
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
+
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) {
+    console.warn(
+      "[upload] BLOB_READ_WRITE_TOKEN no está configurado — la imagen no se subirá. " +
+        "Configura esta variable en las variables de entorno de Vercel."
+    );
+    return null;
+  }
 
   const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
   const filename = `columnas/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi, "-").toLowerCase()}.${extension}`;
 
-  const blob = await put(filename, file, {
-    access: "public",
-    contentType: file.type || "image/jpeg",
-  });
-
-  return blob.url;
+  try {
+    const blob = await put(filename, file, {
+      access: "public",
+      contentType: file.type || "image/jpeg",
+      token,
+    });
+    return blob.url;
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error("[upload] Error al subir imagen a Vercel Blob:", detail);
+    throw new Error(
+      `No se pudo subir la imagen destacada. ` +
+        `Verifica que BLOB_READ_WRITE_TOKEN sea válido en las variables de entorno de Vercel. ` +
+        `Detalle técnico: ${detail}`
+    );
+  }
 }
 
 function normalizePostData(formData: FormData) {

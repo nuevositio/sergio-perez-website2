@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Turbopack (por defecto en Next 16) maneja WASM de forma nativa.
+  // El objeto vacío silencia el error de conflicto con el bloque webpack de abajo.
+  turbopack: {},
   // Prisma 7 usa WASM: necesita asyncWebAssembly para bundlear correctamente
+  // (aplica solo cuando se usa explícitamente --webpack)
   webpack(config, { isServer }) {
     if (isServer) {
       config.experiments = {
