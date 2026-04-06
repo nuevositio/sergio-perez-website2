@@ -1,5 +1,6 @@
 "use server";
 
+import sharp from "sharp";
 import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -42,12 +43,21 @@ async function uploadFeaturedImage(file: File | null | undefined): Promise<strin
   }
 
   const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
-  const filename = `columnas/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi, "-").toLowerCase()}.${extension}`;
+  const baseName = file.name
+    .replace(new RegExp(`\\.${extension}$`, "i"), "")
+    .replace(/[^a-z0-9]/gi, "-")
+    .toLowerCase();
+  const filename = `columnas/${Date.now()}-${baseName}.webp`;
 
   try {
-    const blob = await put(filename, file, {
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const webpBuffer = await sharp(buffer)
+      .webp({ quality: 82 })
+      .toBuffer();
+
+    const blob = await put(filename, webpBuffer, {
       access: "public",
-      contentType: file.type || "image/jpeg",
+      contentType: "image/webp",
       token,
     });
     return blob.url;
