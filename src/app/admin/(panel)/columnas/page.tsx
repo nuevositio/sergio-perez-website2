@@ -3,14 +3,24 @@ import { deletePostAction } from "@/features/columns/actions";
 import { PostStatusBadge } from "@/features/columns/components/post-status-badge";
 import { getAdminPosts } from "@/features/columns/queries";
 import { Button } from "@/components/ui/button";
+import { SuccessBanner } from "@/components/ui/success-banner";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminColumnasPage() {
+type SearchParams = Promise<{ success?: string }>;
+
+export default async function AdminColumnasPage({ searchParams }: { searchParams: SearchParams }) {
   const posts = await getAdminPosts();
+  const { success } = await searchParams;
+
+  const successMessage =
+    success === "created" ? "¡Columna creada con éxito!" :
+    success === "updated" ? "¡Columna actualizada con éxito!" :
+    null;
 
   return (
     <section className="space-y-6">
+      {successMessage && <SuccessBanner message={successMessage} />}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold text-zinc-900">Columnas</h1>
         <Link

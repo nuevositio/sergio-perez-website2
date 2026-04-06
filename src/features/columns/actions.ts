@@ -119,7 +119,7 @@ export async function createPostAction(formData: FormData) {
 
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
-  redirect("/admin/columnas");
+  redirect("/admin/columnas?success=created");
 }
 
 export async function updatePostAction(postId: string, formData: FormData) {
@@ -163,7 +163,7 @@ export async function updatePostAction(postId: string, formData: FormData) {
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
   revalidatePath(`/columnas/${current.slug}`);
-  redirect("/admin/columnas");
+  redirect("/admin/columnas?success=updated");
 }
 
 export async function deletePostAction(formData: FormData) {

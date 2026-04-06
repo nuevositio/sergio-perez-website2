@@ -121,7 +121,14 @@ export default async function ColumnaDetallePage({ params }: Params) {
 
       <div className="prose prose-zinc prose-lg mt-8 max-w-none">
         {((post.content ?? "") as string).split("\n\n").map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
+          <p key={i}>
+            {paragraph.split("\n").map((line, j, arr) => (
+              <span key={j}>
+                {line}
+                {j < arr.length - 1 && <br />}
+              </span>
+            ))}
+          </p>
         ))}
       </div>
 
