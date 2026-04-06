@@ -23,11 +23,12 @@ export async function GET(request: NextRequest) {
 
   // Test 1: prisma singleton (igual que usa el dashboard)
   try {
-    const [posts, cats] = await Promise.all([
+    const [posts, cats, authors] = await Promise.all([
       prismaSingleton.post.count(),
       prismaSingleton.category.count(),
+      prismaSingleton.user.findMany({ select: { id: true, email: true } }),
     ]);
-    results.dbSingleton = { ok: true, posts, cats };
+    results.dbSingleton = { ok: true, posts, cats, authors };
   } catch (e) {
     results.dbSingleton = { ok: false, error: String(e), stack: e instanceof Error ? e.stack : undefined };
   }

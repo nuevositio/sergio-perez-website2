@@ -8,8 +8,16 @@ import { prisma } from "@/lib/prisma";
 import { buildSlug } from "@/lib/slug";
 import { postFormSchema } from "@/features/columns/schemas";
 
-// UUID del autor por defecto (ya existe en la DB)
-const DEFAULT_AUTHOR_ID = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
+async function getDefaultAuthorId(): Promise<string> {
+  const author = await prisma.user.findFirst({ select: { id: true } });
+  if (!author) {
+    throw new Error(
+      "No hay ningún usuario en la base de datos. " +
+        "Crea al menos un usuario antes de publicar columnas."
+    );
+  }
+  return author.id;
+}
 
 async function requireAdminSession() {
   const cookieStore = await cookies();
@@ -92,14 +100,22 @@ export async function createPostAction(formData: FormData) {
       ? await uploadFeaturedImage(featuredImageFile)
       : null;
 
-  await prisma.post.create({
-    data: {
-      ...data,
-      featuredImage,
-      authorId: DEFAULT_AUTHOR_ID,
-      publishedAt: data.status === "published" ? new Date() : null,
-    },
-  });
+  const authorId = await getDefaultAuthorId();
+
+  try {
+    await prisma.post.create({
+      data: {
+        ...data,
+        featuredImage,
+        authorId,
+        publishedAt: data.status === "published" ? new Date() : null,
+      },
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error("[createPost] Error Prisma:", detail);
+    throw new Error(`No se pudo guardar la columna. Detalle técnico: ${detail}`);
+  }
 
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
@@ -126,17 +142,23 @@ export async function updatePostAction(postId: string, formData: FormData) {
       ? await uploadFeaturedImage(featuredImageFile)
       : current.featuredImage;
 
-  await prisma.post.update({
-    where: { id: postId },
-    data: {
-      ...data,
-      featuredImage,
-      publishedAt:
-        data.status === "published"
-          ? current.publishedAt ?? new Date()
-          : null,
-    },
-  });
+  try {
+    await prisma.post.update({
+      where: { id: postId },
+      data: {
+        ...data,
+        featuredImage,
+        publishedAt:
+          data.status === "published"
+            ? current.publishedAt ?? new Date()
+            : null,
+      },
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error("[updatePost] Error Prisma:", detail);
+    throw new Error(`No se pudo actualizar la columna. Detalle técnico: ${detail}`);
+  }
 
   revalidatePath("/admin/columnas");
   revalidatePath("/columnas");
