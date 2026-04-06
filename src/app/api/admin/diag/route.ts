@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { prisma as prismaSingleton } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   // Proteger con la misma lógica que el proxy
@@ -20,6 +21,18 @@ export async function GET(request: NextRequest) {
     },
   };
 
+  // Test 1: prisma singleton (igual que usa el dashboard)
+  try {
+    const [posts, cats] = await Promise.all([
+      prismaSingleton.post.count(),
+      prismaSingleton.category.count(),
+    ]);
+    results.dbSingleton = { ok: true, posts, cats };
+  } catch (e) {
+    results.dbSingleton = { ok: false, error: String(e), stack: e instanceof Error ? e.stack : undefined };
+  }
+
+  // Test 2: dynamic import (nuevo cliente)
   try {
     const { PrismaClient } = await import("@prisma/client");
     const { PrismaPg } = await import("@prisma/adapter-pg");
@@ -30,9 +43,9 @@ export async function GET(request: NextRequest) {
       prisma.category.count(),
     ]);
     await prisma.$disconnect();
-    results.db = { ok: true, posts, cats };
+    results.dbDynamic = { ok: true, posts, cats };
   } catch (e) {
-    results.db = { ok: false, error: String(e) };
+    results.dbDynamic = { ok: false, error: String(e), stack: e instanceof Error ? e.stack : undefined };
   }
 
   return NextResponse.json(results);

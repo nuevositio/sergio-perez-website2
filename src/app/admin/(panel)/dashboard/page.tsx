@@ -4,11 +4,36 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const [postsCount, publishedCount, draftCount] = await Promise.all([
-    prisma.post.count(),
-    prisma.post.count({ where: { status: "published" } }),
-    prisma.post.count({ where: { status: "draft" } }),
-  ]);
+  let postsCount = 0;
+  let publishedCount = 0;
+  let draftCount = 0;
+  let renderError: string | null = null;
+  let renderStack: string | null = null;
+
+  try {
+    [postsCount, publishedCount, draftCount] = await Promise.all([
+      prisma.post.count(),
+      prisma.post.count({ where: { status: "published" } }),
+      prisma.post.count({ where: { status: "draft" } }),
+    ]);
+  } catch (err) {
+    renderError = err instanceof Error ? err.message : String(err);
+    renderStack = err instanceof Error ? (err.stack ?? null) : null;
+  }
+
+  if (renderError) {
+    return (
+      <section className="space-y-4">
+        <h1 className="text-3xl font-semibold text-zinc-900">Dashboard — Error de render</h1>
+        <div className="rounded-xl border border-red-300 bg-red-50 p-5">
+          <p className="font-medium text-red-700">{renderError}</p>
+          {renderStack && (
+            <pre className="mt-3 overflow-auto text-xs text-red-500 opacity-80">{renderStack}</pre>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="space-y-8">
