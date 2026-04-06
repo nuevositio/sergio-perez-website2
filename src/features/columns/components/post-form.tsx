@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import type { Category, Post } from "@prisma/client";
 import { buildSlug } from "@/lib/slug";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -106,14 +105,6 @@ export function PostForm({ categories, submitLabel, action, post }: PostFormProp
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-zinc-700">Estado</label>
-        <Select name="status" defaultValue={post?.status ?? "draft"}>
-          <option value="draft">Borrador</option>
-          <option value="published">Publicado</option>
-        </Select>
-      </div>
-
-      <div>
         <label className="mb-1 block text-sm font-medium text-zinc-700">SEO title</label>
         <Input name="seoTitle" defaultValue={post?.seoTitle ?? ""} />
       </div>
@@ -123,7 +114,29 @@ export function PostForm({ categories, submitLabel, action, post }: PostFormProp
         <Textarea name="seoDescription" defaultValue={post?.seoDescription ?? ""} rows={3} />
       </div>
 
-      <Button type="submit">{submitLabel}</Button>
+      <div className="flex items-center gap-3 border-t border-zinc-100 pt-5">
+        <button
+          type="submit"
+          name="status"
+          value="published"
+          className="rounded-lg bg-zinc-900 px-5 py-2 text-sm font-semibold text-white hover:bg-zinc-700"
+        >
+          Publicar
+        </button>
+        <button
+          type="submit"
+          name="status"
+          value="draft"
+          className="rounded-lg border border-zinc-300 px-5 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-50"
+        >
+          Guardar borrador
+        </button>
+        {post?.status && (
+          <span className="ml-auto text-xs text-zinc-400">
+            Estado actual: <span className="font-medium">{post.status === "published" ? "Publicado" : "Borrador"}</span>
+          </span>
+        )}
+      </div>
     </form>
   );
 }
