@@ -1,6 +1,5 @@
 "use server";
 
-import sharp from "sharp";
 import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -47,28 +46,37 @@ async function uploadFeaturedImage(file: File | null | undefined): Promise<strin
     .replace(new RegExp(`\\.${extension}$`, "i"), "")
     .replace(/[^a-z0-9]/gi, "-")
     .toLowerCase();
-  const filename = `columnas/${Date.now()}-${baseName}.webp`;
 
   try {
+    // Intentar convertir a WebP con sharp (import dinámico — compatible con Vercel Linux)
+    const sharp = (await import("sharp")).default;
     const buffer = Buffer.from(await file.arrayBuffer());
-    const webpBuffer = await sharp(buffer)
-      .webp({ quality: 82 })
-      .toBuffer();
-
-    const blob = await put(filename, webpBuffer, {
+    const webpBuffer = await sharp(buffer).webp({ quality: 82 }).toBuffer();
+    const filenameWebp = `columnas/${Date.now()}-${baseName}.webp`;
+    const blob = await put(filenameWebp, webpBuffer, {
       access: "public",
       contentType: "image/webp",
       token,
     });
     return blob.url;
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    console.error("[upload] Error al subir imagen a Vercel Blob:", detail);
-    throw new Error(
-      `No se pudo subir la imagen destacada. ` +
-        `Verifica que BLOB_READ_WRITE_TOKEN sea válido en las variables de entorno de Vercel. ` +
-        `Detalle técnico: ${detail}`
-    );
+  } catch (sharpError) {
+    // Si sharp falla (ej. binario incompatible), subir el archivo original sin conversión
+    console.warn("[upload] WebP conversion failed, uploading original file:", sharpError);
+    try {
+      const fallbackFilename = `columnas/${Date.now()}-${baseName}.${extension}`;
+      const blob = await put(fallbackFilename, file, {
+        access: "public",
+        contentType: file.type || "image/jpeg",
+        token,
+      });
+      return blob.url;
+    } catch (uploadError) {
+      const detail = uploadError instanceof Error ? uploadError.message : String(uploadError);
+      console.error("[upload] Error al subir imagen a Vercel Blob:", detail);
+      throw new Error(
+        `No se pudo subir la imagen destacada. Detalle técnico: ${detail}`
+      );
+    }
   }
 }
 
