@@ -23,6 +23,7 @@ async function requireAdminSession() {
 
 async function uploadFeaturedImage(file: File | null | undefined) {
   if (!file || file.size === 0) return null;
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
 
   const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
   const filename = `columnas/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi, "-").toLowerCase()}.${extension}`;

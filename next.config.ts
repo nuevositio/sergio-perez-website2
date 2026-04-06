@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Evitar que Next.js bundle estos paquetes que deben cargarse desde node_modules
+  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg", "pg"],
   async headers() {
     return [
       {
