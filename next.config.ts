@@ -1,8 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Evitar que Next.js bundle estos paquetes que deben cargarse desde node_modules
-  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg", "pg"],
+  // Prisma 7 usa WASM: necesita asyncWebAssembly para bundlear correctamente
+  webpack(config, { isServer }) {
+    if (isServer) {
+      config.experiments = {
+        ...config.experiments,
+        asyncWebAssembly: true,
+        layers: true,
+      };
+    }
+    return config;
+  },
   async headers() {
     return [
       {
