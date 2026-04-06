@@ -23,6 +23,9 @@ export default function AdminError({
       <div className="w-full max-w-lg rounded-xl border border-red-200 bg-white p-8">
         <p className="text-sm font-semibold uppercase tracking-wide text-red-500">Error del servidor</p>
         <h1 className="mt-2 text-xl font-semibold text-zinc-900">Algo salió mal</h1>
+        {error.message && (
+          <p className="mt-2 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{error.message}</p>
+        )}
         {error.digest && (
           <p className="mt-1 font-mono text-xs text-zinc-400">Digest: {error.digest}</p>
         )}
