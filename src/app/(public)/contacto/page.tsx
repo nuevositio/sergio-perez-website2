@@ -34,10 +34,10 @@ export default function ContactoPage() {
             <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-400">Email</dt>
             <dd className="mt-1">
               <a
-                href="mailto:yosoy@sergioperez.uy"
+                href="mailto:sp.gestioncultural@gmail.com"
                 className="text-zinc-900 underline underline-offset-2 hover:text-zinc-600"
               >
-                yosoy@sergioperez.uy
+                sp.gestioncultural@gmail.com
               </a>
             </dd>
           </div>
