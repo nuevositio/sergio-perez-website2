@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
-import portrait from "./SP_image_cv.jpeg";
+import portrait from "./spgestionculturalimage.png";
 
 export const metadata: Metadata = {
   title: "Sobre mí — Sergio Pérez",
