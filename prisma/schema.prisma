@@ -11,6 +11,20 @@ enum PostStatus {
   published
 }
 
+enum InvoiceStatus {
+  draft
+  sent
+  paid
+  overdue
+}
+
+enum ExpenseCategory {
+  hosting
+  software
+  services
+  other
+}
+
 model User {
   id        String   @id @db.Uuid
   email     String   @unique
@@ -51,4 +65,61 @@ model Post {
 
   @@index([status, publishedAt])
   @@index([categoryId])
+}
+
+model Client {
+  id        String    @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  invoices  Invoice[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Invoice {
+  id          String        @id @default(cuid())
+  invoiceNo   String        @unique
+  amount      Decimal       @db.Decimal(10, 2)
+  currency    String        @default("UYU")
+  status      InvoiceStatus @default(draft)
+  issuedAt    DateTime
+  dueDate     DateTime?
+  paidAt      DateTime?
+  clientId    String
+  description String?
+  client      Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([clientId])
+  @@index([status])
+  @@index([issuedAt])
+}
+
+model Expense {
+  id          String           @id @default(cuid())
+  amount      Decimal          @db.Decimal(10, 2)
+  currency    String           @default("UYU")
+  category    ExpenseCategory
+  provider    String
+  date        DateTime
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([category])
+  @@index([date])
+}
+
+model PlannedInvestment {
+  id          String   @id @default(cuid())
+  amount      Decimal  @db.Decimal(10, 2)
+  currency    String   @default("UYU")
+  description String
+  plannedDate DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([plannedDate])
 }
