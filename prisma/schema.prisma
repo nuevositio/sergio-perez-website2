@@ -25,6 +25,12 @@ enum ExpenseCategory {
   other
 }
 
+enum ExpenseStatus {
+  received
+  pending
+  paid
+}
+
 model User {
   id        String   @id @db.Uuid
   email     String   @unique
@@ -103,6 +109,7 @@ model Expense {
   amount      Decimal          @db.Decimal(12, 2)
   currency    String           @default("UYU") // "UYU" or "USD"
   category    ExpenseCategory
+  status      ExpenseStatus    @default(received)
   provider    String
   date        DateTime
   description String?
@@ -110,6 +117,7 @@ model Expense {
   updatedAt   DateTime         @updatedAt
 
   @@index([category])
+  @@index([status])
   @@index([date])
   @@index([currency])
 }

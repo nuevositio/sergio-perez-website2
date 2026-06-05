@@ -6,6 +6,7 @@ interface ExpenseFormData {
   amount: number;
   currency: "UYU" | "USD";
   category: "hosting" | "software" | "services" | "other";
+  status: "received" | "pending" | "paid";
   provider: string;
   date: string;
   description?: string;
@@ -22,6 +23,7 @@ export function ExpenseForm({ onSuccess }: Props) {
     amount: 0,
     currency: "UYU",
     category: "hosting",
+    status: "received",
     provider: "",
     date: new Date().toISOString().slice(0, 10),
   });
@@ -54,6 +56,7 @@ export function ExpenseForm({ onSuccess }: Props) {
           amount: formData.amount,
           currency: formData.currency,
           category: formData.category,
+          status: formData.status,
           provider: formData.provider,
           date: new Date(formData.date).toISOString(),
           description: formData.description,
@@ -66,6 +69,7 @@ export function ExpenseForm({ onSuccess }: Props) {
         amount: 0,
         currency: "UYU",
         category: "hosting",
+        status: "received",
         provider: "",
         date: new Date().toISOString().slice(0, 10),
       });
@@ -81,7 +85,7 @@ export function ExpenseForm({ onSuccess }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg">
       <h3 className="text-lg font-semibold text-gray-900">Nuevo Gasto</h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="number"
           name="amount"
@@ -102,19 +106,19 @@ export function ExpenseForm({ onSuccess }: Props) {
           <option value="UYU">UYU (Pesos)</option>
           <option value="USD">USD (Dólares)</option>
         </select>
-
-        <input
-          type="text"
-          name="provider"
-          placeholder="Proveedor"
-          value={formData.provider}
-          onChange={handleChange}
-          required
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input
+        type="text"
+        name="provider"
+        placeholder="Proveedor"
+        value={formData.provider}
+        onChange={handleChange}
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <select
           name="category"
           value={formData.category}
@@ -125,6 +129,17 @@ export function ExpenseForm({ onSuccess }: Props) {
           <option value="software">Software</option>
           <option value="services">Servicios</option>
           <option value="other">Otro</option>
+        </select>
+
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+          className="px-4 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="received">Recibido</option>
+          <option value="pending">Pendiente</option>
+          <option value="paid">Pagado</option>
         </select>
 
         <input
