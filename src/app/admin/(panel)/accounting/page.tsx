@@ -12,11 +12,16 @@ import { DashboardSummary } from "@/lib/accounting";
 const ADMIN_EMAIL = "yosoy@sergioperez.uy";
 
 async function getSession() {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  try {
+    const cookieStore = await cookies();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return null;
+    }
+
+    const supabase = createServerClient(supabaseUrl, supabaseKey, {
       cookies: {
         getAll() {
           return cookieStore.getAll();
@@ -27,13 +32,16 @@ async function getSession() {
           );
         },
       },
-    }
-  );
+    });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  return user;
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    console.error("Auth error:", error);
+    return null;
+  }
 }
 
 async function getDashboardData(): Promise<DashboardSummary> {
@@ -52,7 +60,6 @@ async function getDashboardData(): Promise<DashboardSummary> {
 export default async function AccountingDashboard() {
   const user = await getSession();
 
-  // Proteger acceso solo para el admin
   if (!user || user.email !== ADMIN_EMAIL) {
     redirect("/admin/login");
   }
