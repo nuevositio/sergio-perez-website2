@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface ExpenseFormData {
   amount: number;
+  currency: "UYU" | "USD";
   category: "hosting" | "software" | "services" | "other";
   provider: string;
   date: string;
@@ -19,6 +20,7 @@ export function ExpenseForm({ onSuccess }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<ExpenseFormData>({
     amount: 0,
+    currency: "UYU",
     category: "hosting",
     provider: "",
     date: new Date().toISOString().slice(0, 10),
@@ -50,6 +52,7 @@ export function ExpenseForm({ onSuccess }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount: formData.amount,
+          currency: formData.currency,
           category: formData.category,
           provider: formData.provider,
           date: new Date(formData.date).toISOString(),
@@ -61,6 +64,7 @@ export function ExpenseForm({ onSuccess }: Props) {
 
       setFormData({
         amount: 0,
+        currency: "UYU",
         category: "hosting",
         provider: "",
         date: new Date().toISOString().slice(0, 10),
@@ -77,7 +81,7 @@ export function ExpenseForm({ onSuccess }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg">
       <h3 className="text-lg font-semibold text-gray-900">Nuevo Gasto</h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input
           type="number"
           name="amount"
@@ -88,6 +92,16 @@ export function ExpenseForm({ onSuccess }: Props) {
           step="0.01"
           className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        <select
+          name="currency"
+          value={formData.currency}
+          onChange={handleChange}
+          className="px-4 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="UYU">UYU (Pesos)</option>
+          <option value="USD">USD (Dólares)</option>
+        </select>
 
         <input
           type="text"

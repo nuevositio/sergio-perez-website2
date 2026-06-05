@@ -5,6 +5,7 @@ import { z } from "zod";
 const InvoiceSchema = z.object({
   invoiceNo: z.string(),
   amount: z.number().positive(),
+  currency: z.enum(["UYU", "USD"]).optional(),
   clientId: z.string(),
   issuedAt: z.string().datetime(),
   dueDate: z.string().datetime().optional(),
@@ -33,6 +34,7 @@ export async function POST(request: NextRequest) {
       data: {
         invoiceNo: validated.invoiceNo,
         amount: validated.amount,
+        currency: validated.currency || "UYU",
         clientId: validated.clientId,
         issuedAt: new Date(validated.issuedAt),
         dueDate: validated.dueDate ? new Date(validated.dueDate) : null,

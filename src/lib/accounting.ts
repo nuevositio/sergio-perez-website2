@@ -1,4 +1,4 @@
-import { Decimal } from "@prisma/client/runtime/library";
+// Decimal handling for Prisma
 
 export interface MonthlyMetrics {
   month: string;
@@ -20,6 +20,10 @@ export interface ClientMetrics {
 }
 
 export interface DashboardSummary {
+  totalIncomeUYU: number;
+  totalExpensesUYU: number;
+  totalIncomeUSD: number;
+  totalExpensesUSD: number;
   totalIncome: number;
   totalExpenses: number;
   netProfit: number;
@@ -30,8 +34,14 @@ export interface DashboardSummary {
   clientMetrics: ClientMetrics[];
 }
 
-export function decimalToNumber(value: Decimal | number): number {
-  if (value instanceof Decimal) {
+export function decimalToNumber(value: any): number {
+  if (typeof value === "number") {
+    return value;
+  }
+  if (typeof value === "string") {
+    return parseFloat(value);
+  }
+  if (value && typeof value === "object" && "toNumber" in value) {
     return value.toNumber();
   }
   return Number(value);

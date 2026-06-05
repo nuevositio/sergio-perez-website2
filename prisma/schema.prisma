@@ -80,8 +80,8 @@ model Client {
 model Invoice {
   id          String        @id @default(cuid())
   invoiceNo   String        @unique
-  amount      Decimal       @db.Decimal(10, 2)
-  currency    String        @default("UYU")
+  amount      Decimal       @db.Decimal(12, 2)
+  currency    String        @default("UYU") // "UYU" or "USD"
   status      InvoiceStatus @default(draft)
   issuedAt    DateTime
   dueDate     DateTime?
@@ -95,12 +95,13 @@ model Invoice {
   @@index([clientId])
   @@index([status])
   @@index([issuedAt])
+  @@index([currency])
 }
 
 model Expense {
   id          String           @id @default(cuid())
-  amount      Decimal          @db.Decimal(10, 2)
-  currency    String           @default("UYU")
+  amount      Decimal          @db.Decimal(12, 2)
+  currency    String           @default("UYU") // "UYU" or "USD"
   category    ExpenseCategory
   provider    String
   date        DateTime
@@ -110,6 +111,7 @@ model Expense {
 
   @@index([category])
   @@index([date])
+  @@index([currency])
 }
 
 model PlannedInvestment {

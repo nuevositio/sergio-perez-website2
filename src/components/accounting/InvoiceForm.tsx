@@ -5,6 +5,7 @@ import { useState } from "react";
 interface InvoiceFormData {
   invoiceNo: string;
   amount: number;
+  currency: "UYU" | "USD";
   clientId: string;
   clientName?: string;
   issuedAt: string;
@@ -24,6 +25,7 @@ export function InvoiceForm({ onSuccess }: Props) {
   const [formData, setFormData] = useState<InvoiceFormData>({
     invoiceNo: "",
     amount: 0,
+    currency: "UYU",
     clientId: "",
     issuedAt: new Date().toISOString().slice(0, 10),
     status: "draft",
@@ -68,6 +70,7 @@ export function InvoiceForm({ onSuccess }: Props) {
         body: JSON.stringify({
           invoiceNo: formData.invoiceNo,
           amount: formData.amount,
+          currency: formData.currency,
           clientId: formData.clientId,
           issuedAt: new Date(formData.issuedAt).toISOString(),
           dueDate: formData.dueDate
@@ -83,6 +86,7 @@ export function InvoiceForm({ onSuccess }: Props) {
       setFormData({
         invoiceNo: "",
         amount: 0,
+        currency: "UYU",
         clientId: "",
         issuedAt: new Date().toISOString().slice(0, 10),
         status: "draft",
@@ -100,7 +104,7 @@ export function InvoiceForm({ onSuccess }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg">
       <h3 className="text-lg font-semibold text-gray-900">Nueva Factura</h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input
           type="text"
           name="invoiceNo"
@@ -121,6 +125,16 @@ export function InvoiceForm({ onSuccess }: Props) {
           step="0.01"
           className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        <select
+          name="currency"
+          value={formData.currency}
+          onChange={handleChange}
+          className="px-4 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="UYU">UYU (Pesos)</option>
+          <option value="USD">USD (Dólares)</option>
+        </select>
       </div>
 
       <div className="space-y-2">

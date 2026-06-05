@@ -7,36 +7,79 @@ interface Props {
 }
 
 export function DashboardMetrics({ data }: Props) {
-  const formatCurrency = (value: number) => {
+  const formatCurrency = (value: number, currency: string) => {
     return new Intl.NumberFormat("es-UY", {
       style: "currency",
-      currency: "UYU",
+      currency,
       minimumFractionDigits: 0,
     }).format(value);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <MetricCard
-        title="Ingresos Totales"
-        value={formatCurrency(data.totalIncome)}
-        color="green"
-      />
-      <MetricCard
-        title="Gastos Totales"
-        value={formatCurrency(data.totalExpenses)}
-        color="red"
-      />
-      <MetricCard
-        title="Ganancia Neta"
-        value={formatCurrency(data.netProfit)}
-        color={data.netProfit >= 0 ? "blue" : "red"}
-      />
-      <MetricCard
-        title="Margen de Ganancia"
-        value={`${data.profitMargin.toFixed(1)}%`}
-        color="purple"
-      />
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* UYU Metrics */}
+        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+          <h3 className="text-sm font-semibold text-gray-700 mb-4">
+            Pesos Uruguayos (UYU)
+          </h3>
+          <div className="space-y-3">
+            <MetricCard
+              title="Ingresos"
+              value={formatCurrency(data.totalIncomeUYU, "UYU")}
+              color="green"
+            />
+            <MetricCard
+              title="Gastos"
+              value={formatCurrency(data.totalExpensesUYU, "UYU")}
+              color="red"
+            />
+            <MetricCard
+              title="Saldo"
+              value={formatCurrency(
+                data.totalIncomeUYU - data.totalExpensesUYU,
+                "UYU"
+              )}
+              color={
+                data.totalIncomeUYU - data.totalExpensesUYU >= 0
+                  ? "blue"
+                  : "red"
+              }
+            />
+          </div>
+        </div>
+
+        {/* USD Metrics */}
+        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+          <h3 className="text-sm font-semibold text-gray-700 mb-4">
+            Dólares (USD)
+          </h3>
+          <div className="space-y-3">
+            <MetricCard
+              title="Ingresos"
+              value={formatCurrency(data.totalIncomeUSD, "USD")}
+              color="green"
+            />
+            <MetricCard
+              title="Gastos"
+              value={formatCurrency(data.totalExpensesUSD, "USD")}
+              color="red"
+            />
+            <MetricCard
+              title="Saldo"
+              value={formatCurrency(
+                data.totalIncomeUSD - data.totalExpensesUSD,
+                "USD"
+              )}
+              color={
+                data.totalIncomeUSD - data.totalExpensesUSD >= 0
+                  ? "blue"
+                  : "red"
+              }
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

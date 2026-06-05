@@ -20,14 +20,31 @@ export async function GET() {
     const monthlyMetrics = calculateMonthlyMetrics(invoices, expenses, investments);
     const clientMetrics = calculateClientMetrics(invoices, expenses);
 
-    // Calculate summary
-    const totalIncome = invoices.reduce((sum, i) => sum + decimalToNumber(i.amount), 0);
-    const totalExpenses = expenses.reduce((sum, e) => sum + decimalToNumber(e.amount), 0);
+    // Calculate summary by currency
+    const totalIncomeUYU = invoices
+      .filter((i) => i.currency === "UYU")
+      .reduce((sum, i) => sum + decimalToNumber(i.amount), 0);
+    const totalIncomeUSD = invoices
+      .filter((i) => i.currency === "USD")
+      .reduce((sum, i) => sum + decimalToNumber(i.amount), 0);
+    const totalExpensesUYU = expenses
+      .filter((e) => e.currency === "UYU")
+      .reduce((sum, e) => sum + decimalToNumber(e.amount), 0);
+    const totalExpensesUSD = expenses
+      .filter((e) => e.currency === "USD")
+      .reduce((sum, e) => sum + decimalToNumber(e.amount), 0);
+
+    const totalIncome = totalIncomeUYU + totalIncomeUSD;
+    const totalExpenses = totalExpensesUYU + totalExpensesUSD;
     const netProfit = totalIncome - totalExpenses;
     const profitMargin = totalIncome > 0 ? (netProfit / totalIncome) * 100 : 0;
     const avgInvoiceValue = invoices.length > 0 ? totalIncome / invoices.length : 0;
 
     const summary: DashboardSummary = {
+      totalIncomeUYU,
+      totalExpensesUYU,
+      totalIncomeUSD,
+      totalExpensesUSD,
       totalIncome,
       totalExpenses,
       netProfit,
