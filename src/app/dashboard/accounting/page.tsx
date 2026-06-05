@@ -1,6 +1,9 @@
 import { DashboardMetrics } from "@/components/accounting/DashboardMetrics";
 import { CashFlowChart } from "@/components/accounting/CashFlowChart";
 import { ClientMetricsTable } from "@/components/accounting/ClientMetricsTable";
+import { InvoiceForm } from "@/components/accounting/InvoiceForm";
+import { ExpenseForm } from "@/components/accounting/ExpenseForm";
+import { InvestmentForm } from "@/components/accounting/InvestmentForm";
 import { DashboardSummary } from "@/lib/accounting";
 
 async function getDashboardData(): Promise<DashboardSummary> {
@@ -29,6 +32,13 @@ export default async function AccountingDashboard() {
       </div>
 
       <DashboardMetrics data={dashboardData} />
+
+      {/* Formularios de entrada */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <InvoiceForm />
+        <ExpenseForm />
+        <InvestmentForm />
+      </div>
 
       <CashFlowChart data={dashboardData.projectedCashFlow} />
 

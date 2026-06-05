@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { DashboardSummary } from "@/lib/accounting";
 
 interface Props {
@@ -7,13 +8,16 @@ interface Props {
 }
 
 export function DashboardMetrics({ data }: Props) {
-  const formatCurrency = (value: number, currency: string) => {
-    return new Intl.NumberFormat("es-UY", {
-      style: "currency",
-      currency,
-      minimumFractionDigits: 0,
-    }).format(value);
-  };
+  const formatCurrency = useMemo(
+    () => (value: number, currency: string) => {
+      return new Intl.NumberFormat("es-UY", {
+        style: "currency",
+        currency,
+        minimumFractionDigits: 0,
+      }).format(value);
+    },
+    []
+  );
 
   return (
     <div className="space-y-6">
