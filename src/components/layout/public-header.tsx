@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -19,9 +20,15 @@ export function PublicHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-200 bg-white/90 backdrop-blur-sm">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex flex-col leading-tight hover:opacity-75 transition-opacity">
-          <span className="text-base font-semibold tracking-tight text-zinc-900">Sergio Pérez</span>
-          <span className="text-[11px] font-normal tracking-wide text-zinc-500">Gestión Cultural e Impulso Digital</span>
+        <Link href="/" className="flex items-center hover:opacity-75 transition-opacity">
+          <Image
+            src="/logoSP.png"
+            alt="Sergio Pérez - Gestión Cultural e Impulso Digital"
+            width={180}
+            height={60}
+            priority
+            className="h-10 w-auto sm:h-12"
+          />
         </Link>
         <nav className="hidden gap-1 md:flex">
           {links.map((link) => {

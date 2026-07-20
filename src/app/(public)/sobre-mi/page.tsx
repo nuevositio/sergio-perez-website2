@@ -1,8 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
-import portrait from "./spgestionculturalimage.png";
-
 export const metadata: Metadata = {
   title: "Sobre mí — Sergio Pérez",
   description:
@@ -148,11 +146,14 @@ export default function SobreMiPage() {
         </div>
 
         <div className="mx-auto w-full max-w-sm">
-          <div className="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white p-3 shadow-[0_24px_60px_rgba(24,35,48,0.08)]">
+          <div className="aspect-square overflow-hidden rounded-[2rem] border border-zinc-200 bg-white p-3 shadow-[0_24px_60px_rgba(24,35,48,0.08)]">
             <Image
-              src={portrait}
+              src="/avatarSP.png"
               alt="Retrato profesional de Sergio Pérez"
-              className="h-auto w-full rounded-[1.4rem] object-cover"
+              width={941}
+              height={941}
+              sizes="(min-width: 1024px) 384px, 100vw"
+              className="h-full w-full rounded-[1.4rem] object-cover object-[center_42%] grayscale contrast-110"
               priority
             />
           </div>
