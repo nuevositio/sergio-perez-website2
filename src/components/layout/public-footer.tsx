@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const nav = [
@@ -66,7 +67,15 @@ export function PublicFooter() {
       <div className="mx-auto w-full max-w-6xl px-6 py-10">
         <div className="mb-8 flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="space-y-3">
-            <p className="font-semibold text-zinc-900">Sergio Pérez</p>
+            <Link href="/" className="inline-flex transition hover:opacity-75">
+              <Image
+                src="/logoSP.png"
+                alt="Sergio Pérez - Gestor Cultural"
+                width={190}
+                height={63}
+                className="h-12 w-auto mix-blend-multiply"
+              />
+            </Link>
             <p className="text-sm text-zinc-500">Gestor cultural · Comunicador · Desarrollador web</p>
             {/* Social icons */}
             <div className="flex gap-3 pt-1">

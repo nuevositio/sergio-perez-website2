@@ -24,10 +24,10 @@ export function PublicHeader() {
           <Image
             src="/logoSP.png"
             alt="Sergio Pérez - Gestión Cultural e Impulso Digital"
-            width={180}
-            height={60}
+            width={220}
+            height={73}
             priority
-            className="h-10 w-auto sm:h-12"
+            className="h-12 w-auto mix-blend-multiply sm:h-14"
           />
         </Link>
         <nav className="hidden gap-1 md:flex">

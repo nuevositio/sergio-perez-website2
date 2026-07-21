@@ -59,9 +59,9 @@ export const metadata: Metadata = {
       "Proyectos culturales, comunicación estratégica y plataformas web profesionales en Uruguay.",
     images: [
       {
-        url: "/og-default.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logoSP.png",
+        width: 2172,
+        height: 724,
         alt: "Sergio Pérez — Gestor Cultural, Comunicador y Desarrollador Web",
       },
     ],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Sergio Pérez — Gestor Cultural, Comunicador y Desarrollador Web",
     description:
       "Proyectos culturales, comunicación estratégica y plataformas web profesionales en Uruguay.",
-    images: ["/og-default.jpg"],
+    images: ["/logoSP.png"],
   },
   alternates: {
     canonical: BASE_URL,
