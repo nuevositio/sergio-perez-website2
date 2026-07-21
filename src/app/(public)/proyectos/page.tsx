@@ -17,12 +17,13 @@ export const metadata: Metadata = {
 
 const projects = [
   {
-    name: "Expo Deporte y Bienestar",
-    url: "https://www.expodeporteybienestar.uy",
-    display: "expodeporteybienestar.uy",
-    category: "Eventos & bienestar",
-    description: "Sitio web para evento nacional orientado al deporte, la salud y el bienestar.",
-    screenshot: "/images/proyectos/expodeporteybienestar.jpg",
+    name: "Radio Centro",
+    url: "https://www.radiocentro.uy",
+    display: "radiocentro.uy",
+    category: "Medios & comunicación",
+    description: "Sitio web para medio radial de Cardona con programación, noticias y escucha en vivo.",
+    screenshot: "/images/proyectos/radiocentro.jpg",
+    recent: true,
   },
   {
     name: "Expo Deporte Latam",
@@ -31,6 +32,25 @@ const projects = [
     category: "Eventos & plataforma regional",
     description: "Plataforma internacional para conectar deporte, salud, turismo y oportunidades en América Latina.",
     screenshot: "/images/proyectos/expodeportelatam.jpg",
+    recent: true,
+  },
+  {
+    name: "Cardona",
+    url: "https://www.cardona.uy",
+    display: "cardona.uy",
+    category: "Ciudad & comunidad",
+    description: "Presencia digital para comunicación local, servicios e información de Cardona.",
+    screenshot: "",
+    recent: true,
+  },
+  {
+    name: "Expo Deporte y Bienestar",
+    url: "https://www.expodeporteybienestar.uy",
+    display: "expodeporteybienestar.uy",
+    category: "Eventos & bienestar",
+    description: "Sitio web para evento nacional orientado al deporte, la salud y el bienestar.",
+    screenshot: "/images/proyectos/expodeporteybienestar.jpg",
+    recent: true,
   },
   {
     name: "Juan José Zeballos",
@@ -39,6 +59,7 @@ const projects = [
     category: "Marca personal & cultura",
     description: "Sitio profesional para pianista uruguayo, gestor cultural y trayectoria escénica.",
     screenshot: "/images/proyectos/zeballos.jpg",
+    recent: true,
   },
   {
     name: "Metalúrgica Luis Loza",
@@ -87,14 +108,6 @@ const projects = [
     category: "Turismo & viajes",
     description: "Plataforma web para agencia de viajes con catálogo de destinos.",
     screenshot: "/images/proyectos/mactravel.jpg",
-  },
-  {
-    name: "Radio Centro",
-    url: "https://radiocentro.uy",
-    display: "radiocentro.uy",
-    category: "Medios & comunicación",
-    description: "Sitio web para medio radial con identidad digital propia.",
-    screenshot: "",
   },
   {
     name: "Cata Santos",
@@ -170,6 +183,13 @@ export default function ProyectosPage() {
               )}
               {/* Overlay sutil */}
               <div className="absolute inset-0 bg-zinc-900/5 group-hover:bg-transparent transition-colors duration-500" />
+              {project.recent ? (
+                <div className="absolute left-3 top-3">
+                  <span className="rounded-md bg-red-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-sm">
+                    RECIENTE
+                  </span>
+                </div>
+              ) : null}
               {/* Badge "Visitar" */}
               <div className="absolute bottom-3 right-3 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                 <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-lg backdrop-blur-sm">
