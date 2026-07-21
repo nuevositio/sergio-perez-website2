@@ -17,6 +17,30 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    name: "Expo Deporte y Bienestar",
+    url: "https://www.expodeporteybienestar.uy",
+    display: "expodeporteybienestar.uy",
+    category: "Eventos & bienestar",
+    description: "Sitio web para evento nacional orientado al deporte, la salud y el bienestar.",
+    screenshot: "/images/proyectos/expodeporteybienestar.jpg",
+  },
+  {
+    name: "Expo Deporte Latam",
+    url: "https://www.expodeportelatam.com",
+    display: "expodeportelatam.com",
+    category: "Eventos & plataforma regional",
+    description: "Plataforma internacional para conectar deporte, salud, turismo y oportunidades en América Latina.",
+    screenshot: "/images/proyectos/expodeportelatam.jpg",
+  },
+  {
+    name: "Juan José Zeballos",
+    url: "https://www.zeballos.com.uy",
+    display: "zeballos.com.uy",
+    category: "Marca personal & cultura",
+    description: "Sitio profesional para pianista uruguayo, gestor cultural y trayectoria escénica.",
+    screenshot: "/images/proyectos/zeballos.jpg",
+  },
+  {
     name: "Metalúrgica Luis Loza",
     url: "https://metalurgicaluisloza.uy",
     display: "metalurgicaluisloza.uy",
@@ -63,22 +87,6 @@ const projects = [
     category: "Turismo & viajes",
     description: "Plataforma web para agencia de viajes con catálogo de destinos.",
     screenshot: "/images/proyectos/mactravel.jpg",
-  },
-  {
-    name: "Expo Deporte y Bienestar",
-    url: "https://www.expodeporteybienestar.uy",
-    display: "expodeporteybienestar.uy",
-    category: "Eventos & bienestar",
-    description: "Sitio web para evento orientado al deporte, la salud y el bienestar.",
-    screenshot: "",
-  },
-  {
-    name: "Zeballos",
-    url: "https://www.zeballos.com.uy",
-    display: "zeballos.com.uy",
-    category: "Empresa & servicios",
-    description: "Presencia digital institucional para marca uruguaya.",
-    screenshot: "",
   },
   {
     name: "Radio Centro",
