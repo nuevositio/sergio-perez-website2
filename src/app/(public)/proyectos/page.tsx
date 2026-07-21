@@ -36,10 +36,10 @@ const projects = [
   },
   {
     name: "Cardona",
-    url: "https://www.cardona.uy",
-    display: "cardona.uy",
+    url: "http://www.cardona.soriano.gub.uy",
+    display: "cardona.soriano.gub.uy",
     category: "Ciudad & comunidad",
-    description: "Presencia digital para comunicación local, servicios e información de Cardona.",
+    description: "Sitio oficial local con servicios, información institucional y comunicación de Cardona.",
     screenshot: "",
     recent: true,
   },
