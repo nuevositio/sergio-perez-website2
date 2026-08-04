@@ -54,7 +54,7 @@ const social = [
     href: "https://themesh.art/perfil/spgestioncultural/",
     label: "Mesh",
     icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#7c3aff]" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
         <path
           d="M9.5 4.5 7.7 19.5M16.3 4.5l-1.8 15M5 9h15M4 15h15"
           fill="none"
