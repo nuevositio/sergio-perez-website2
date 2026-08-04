@@ -51,6 +51,15 @@ const social = [
     ),
   },
   {
+    href: "https://themesh.art/perfil/spgestioncultural/",
+    label: "Mesh",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+        <path d="M7 7.25a3.25 3.25 0 116.257 1.221l2.368 2.368a3.25 3.25 0 11-1.414 1.414l-2.368-2.368a3.237 3.237 0 01-2.686 0l-2.368 2.368a3.25 3.25 0 11-1.414-1.414l2.368-2.368A3.236 3.236 0 017 7.25zm3.25-1.25a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM4.25 13.5a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zm15.5 1.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0z" />
+      </svg>
+    ),
+  },
+  {
     href: "https://wa.me/59895342022",
     label: "WhatsApp",
     icon: (

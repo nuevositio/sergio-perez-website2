@@ -25,6 +25,7 @@ export function PersonJsonLd() {
       "https://www.instagram.com/sergioperez.uy",
       "https://www.facebook.com/sergioperez.uy",
       "https://www.linkedin.com/in/sergioperezuy",
+      "https://themesh.art/perfil/spgestioncultural/",
     ],
     knowsAbout: [
       "Gestión Cultural",
