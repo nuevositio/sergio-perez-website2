@@ -5,6 +5,15 @@
 
 const BASE = "https://www.sergioperez.uy";
 
+function JsonLdScript({ schema }: { schema: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
+    />
+  );
+}
+
 // ─── Persona / Autor ───────────────────────────────────────────────────────────
 export function PersonJsonLd() {
   const schema = {
@@ -36,12 +45,7 @@ export function PersonJsonLd() {
     ],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLdScript schema={schema} />;
 }
 
 // ─── WebSite con SearchAction ─────────────────────────────────────────────────
@@ -65,12 +69,7 @@ export function WebSiteJsonLd() {
     },
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLdScript schema={schema} />;
 }
 
 // ─── Servicio Profesional ─────────────────────────────────────────────────────
@@ -121,12 +120,106 @@ export function ProfessionalServiceJsonLd() {
     },
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLdScript schema={schema} />;
+}
+
+// ─── Servicio de diseño y desarrollo web ─────────────────────────────────────
+export function WebDesignServiceJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${BASE}/desarrollo#web-design-service`,
+    name: "Diseño web y desarrollo web en Uruguay - Sergio Pérez",
+    url: `${BASE}/desarrollo`,
+    image: `${BASE}/logoSP.png`,
+    email: "yosoy@sergioperez.uy",
+    telephone: "+59895342022",
+    priceRange: "$$",
+    founder: { "@id": `${BASE}/#person` },
+    provider: { "@id": `${BASE}/#person` },
+    areaServed: [
+      { "@type": "Country", name: "Uruguay" },
+      { "@type": "City", name: "Montevideo" },
+      { "@type": "City", name: "Cardona" },
+      { "@type": "AdministrativeArea", name: "Soriano" },
+      { "@type": "AdministrativeArea", name: "Colonia" },
+    ],
+    knowsAbout: [
+      "diseño web Uruguay",
+      "desarrollo web Uruguay",
+      "páginas web para empresas",
+      "sitios web institucionales",
+      "Next.js",
+      "SEO técnico",
+      "hosting y dominios",
+    ],
+    makesOffer: [
+      {
+        "@type": "Offer",
+        url: `${BASE}/desarrollo`,
+        itemOffered: {
+          "@type": "Service",
+          name: "Diseño de páginas web en Uruguay",
+          serviceType: "Diseño web",
+          description:
+            "Diseño de sitios web profesionales, responsivos y orientados a consultas para empresas, profesionales, instituciones y proyectos culturales.",
+          areaServed: { "@type": "Country", name: "Uruguay" },
+        },
+      },
+      {
+        "@type": "Offer",
+        url: `${BASE}/desarrollo`,
+        itemOffered: {
+          "@type": "Service",
+          name: "Desarrollo web profesional",
+          serviceType: "Desarrollo web",
+          description:
+            "Desarrollo de sitios rápidos con Next.js, SEO técnico, formularios, paneles de gestión, hosting, dominios y mantenimiento.",
+          areaServed: { "@type": "Country", name: "Uruguay" },
+        },
+      },
+      {
+        "@type": "Offer",
+        url: `${BASE}/cotizacion`,
+        itemOffered: {
+          "@type": "Service",
+          name: "Cotización de página web",
+          serviceType: "Cotización web",
+          description:
+            "Diagnóstico y presupuesto para sitios institucionales, landing pages, catálogos, medios digitales y plataformas a medida.",
+          areaServed: { "@type": "Country", name: "Uruguay" },
+        },
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Servicios web en Uruguay",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Sitio institucional" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Landing page" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "E-commerce y catálogo" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Mantenimiento web" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "SEO técnico" },
+        },
+      ],
+    },
+  };
+
+  return <JsonLdScript schema={schema} />;
 }
 
 // ─── BreadcrumbList ───────────────────────────────────────────────────────────
@@ -147,12 +240,7 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
     })),
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLdScript schema={schema} />;
 }
 
 // ─── Article / BlogPosting ────────────────────────────────────────────────────
@@ -206,10 +294,5 @@ export function ArticleJsonLd({
     }),
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLdScript schema={schema} />;
 }

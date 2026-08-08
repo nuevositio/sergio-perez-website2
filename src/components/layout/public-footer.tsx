@@ -8,6 +8,8 @@ const nav = [
   { href: "/columnas", label: "Columnas" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/desarrollo", label: "Desarrollo web" },
+  { href: "/diseno-web-uruguay", label: "Diseño web Uruguay" },
+  { href: "/desarrollo-web-uruguay", label: "Desarrollo web Uruguay" },
   { href: "/arma-tu-proyecto", label: "Armá tu proyecto" },
   { href: "/cotizacion", label: "Cotización" },
   { href: "/contacto", label: "Contacto" },

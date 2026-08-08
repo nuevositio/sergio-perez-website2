@@ -1,0 +1,25 @@
+# Sergio Pérez
+
+Sitio oficial de Sergio Pérez, gestor cultural, comunicador y desarrollador web en Uruguay.
+
+## Servicios principales
+
+- Diseño web en Uruguay para empresas, profesionales, instituciones, artistas, emprendimientos y proyectos culturales.
+- Desarrollo web profesional con Next.js, SEO técnico, estructura responsive, formularios, hosting, dominios y mantenimiento.
+- Gestión de proyectos culturales, estrategia editorial, comunicación institucional y producción de contenidos.
+
+## URLs relevantes
+
+- Inicio: https://www.sergioperez.uy/
+- Diseño web y desarrollo web: https://www.sergioperez.uy/desarrollo
+- Diseño web Uruguay: https://www.sergioperez.uy/diseno-web-uruguay
+- Desarrollo web Uruguay: https://www.sergioperez.uy/desarrollo-web-uruguay
+- Portfolio de proyectos: https://www.sergioperez.uy/proyectos
+- Servicios: https://www.sergioperez.uy/servicios
+- Cotización web: https://www.sergioperez.uy/cotizacion
+- Contacto: https://www.sergioperez.uy/contacto
+
+## Contacto
+
+- Email: yosoy@sergioperez.uy
+- WhatsApp: +598 95 342 022

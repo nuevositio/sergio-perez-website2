@@ -27,7 +27,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${BASE}/desarrollo`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.95,
+    },
+    {
+      url: `${BASE}/diseno-web-uruguay`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${BASE}/desarrollo-web-uruguay`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: `${BASE}/columnas`,

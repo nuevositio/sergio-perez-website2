@@ -1,251 +1,292 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  BreadcrumbJsonLd,
+  ProfessionalServiceJsonLd,
+  WebDesignServiceJsonLd,
+} from "@/components/seo/json-ld";
+
+const BASE_URL = "https://www.sergioperez.uy";
 
 export const metadata: Metadata = {
-  title: "Desarrollo Web Profesional en Uruguay — Next.js, Hosting y Dominios",
+  title: "Diseño Web y Desarrollo Web en Uruguay — Sergio Pérez",
   description:
-    "Servicios de desarrollo web profesional, hosting, dominios, redes sociales y registro de marca en Uruguay. Sitios rápidos, seguros y diseñados para convertir.",
-  alternates: { canonical: "https://www.sergioperez.uy/desarrollo" },
+    "Diseño web y desarrollo web profesional en Uruguay para empresas, instituciones, marcas personales y proyectos culturales. Sitios rápidos, SEO técnico, hosting, dominios y mantenimiento.",
+  keywords: [
+    "diseño web Uruguay",
+    "desarrollo web Uruguay",
+    "paginas web Uruguay",
+    "diseño de páginas web Uruguay",
+    "desarrollador web Uruguay",
+    "sitios web profesionales Uruguay",
+    "Next.js Uruguay",
+    "SEO técnico Uruguay",
+    "hosting dominios Uruguay",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/desarrollo`,
+  },
   openGraph: {
-    title: "Desarrollo Web Profesional en Uruguay | Sergio Pérez",
+    title: "Diseño Web y Desarrollo Web en Uruguay | Sergio Pérez",
     description:
-      "Desarrollo web con Next.js, hosting, dominios, redes sociales y registro de marca en Uruguay.",
-    url: "https://www.sergioperez.uy/desarrollo",
+      "Sitios profesionales con diseño claro, tecnología moderna, SEO técnico y soporte cercano en Uruguay.",
+    url: `${BASE_URL}/desarrollo`,
     type: "website",
   },
 };
 
 const WA_URL =
-  "https://wa.me/59895342022?text=Hola%20Sergio%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20digitales";
+  "https://wa.me/59895342022?text=Hola%20Sergio%2C%20quiero%20cotizar%20un%20sitio%20web%20profesional";
 
-const services = [
+const coreServices = [
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 8v4l2 2" />
-        <path d="M8.5 8.5h.01M15.5 8.5h.01" />
-        <path d="M9 15c.83.63 1.87 1 3 1s2.17-.37 3-1" />
-      </svg>
-    ),
-    title: "Registro de Marca",
+    title: "Diseño de páginas web",
     description:
-      "Protegé tu marca legalmente en Uruguay y el mundo. Asesoramiento completo para registro de marcas.",
-    features: [
-      "Búsqueda de antecedentes marcarios",
-      "Asesoramiento legal especializado",
-      "Gestión completa del trámite",
-      "Registro nacional e internacional",
-      "Renovaciones y mantenimiento",
-    ],
-    featured: true,
+      "Sitios institucionales, landing pages y presencias digitales para empresas, profesionales, artistas, emprendimientos e instituciones.",
+    items: ["Diseño responsive", "Arquitectura de contenidos", "Textos orientados a conversión", "Accesibilidad básica"],
   },
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </svg>
-    ),
-    title: "Desarrollo Web Profesional",
+    title: "Desarrollo web profesional",
     description:
-      "Sitios web modernos, responsivos y optimizados para SEO. Desde landing pages hasta e-commerce completos.",
-    features: [
-      "Diseño responsive (móvil y desktop)",
-      "Optimización para buscadores (SEO)",
-      "Velocidad de carga optimizada",
-      "Panel de administración intuitivo",
-      "Integración con redes sociales",
-    ],
-    featured: false,
+      "Implementación con Next.js, TypeScript y buenas prácticas técnicas para lograr sitios rápidos, mantenibles y escalables.",
+    items: ["Next.js y React", "Formularios y automatizaciones", "Paneles de gestión", "Integración con servicios externos"],
   },
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <rect x="5" y="2" width="14" height="20" rx="2" />
-        <path d="M12 18h.01" />
-      </svg>
-    ),
-    title: "Gestión de Redes Sociales",
+    title: "SEO técnico y posicionamiento",
     description:
-      "Estrategia completa para redes sociales. Contenido, diseño y crecimiento orgánico de tu audiencia.",
-    features: [
-      "Estrategia de contenido personalizada",
-      "Diseño gráfico para posts",
-      "Programación automática",
-      "Análisis y reportes mensuales",
-      "Gestión de comunidad",
-    ],
-    featured: false,
+      "Configuración on-page para que Google entienda el servicio, el territorio, la autoridad profesional y la intención comercial.",
+    items: ["Metadata por página", "Schema.org", "Sitemap y robots", "Optimización de rendimiento"],
   },
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    title: "Hosting Web Profesional",
+    title: "Hosting, dominios y mantenimiento",
     description:
-      "Alojamiento web confiable y rápido con soporte técnico y certificados SSL incluidos.",
-    features: [
-      "99.9% de tiempo de actividad garantizado",
-      "Certificado SSL gratuito",
-      "Copias de seguridad automáticas",
-      "Soporte técnico especializado",
-      "Panel de control cPanel",
-    ],
-    featured: false,
+      "Acompañamiento posterior al lanzamiento para que el sitio siga activo, seguro, actualizado y medible.",
+    items: ["Dominios .uy y .com", "DNS y correo", "SSL", "Soporte y mejoras mensuales"],
+  },
+];
+
+const projectTypes = [
+  "Sitios para empresas y PyMEs",
+  "Webs para profesionales y marcas personales",
+  "Sitios culturales, patrimoniales e institucionales",
+  "Landing pages para campañas",
+  "Catálogos y e-commerce inicial",
+  "Medios digitales, blogs y columnas",
+];
+
+const evidence = [
+  "Experiencia en sitios para turismo, industria, cultura, medios, comercio y marcas personales.",
+  "Portfolio público con proyectos desarrollados para Uruguay y la región.",
+  "Perfil híbrido: desarrollo web, comunicación estratégica, gestión cultural y producción de contenidos.",
+  "Trabajo directo con el titular del proyecto, sin intermediación innecesaria.",
+];
+
+const faqs = [
+  {
+    question: "¿Cuánto cuesta una página web en Uruguay?",
+    answer:
+      "Depende del alcance: cantidad de secciones, diseño, redacción, formularios, panel de administración, hosting, dominio, integraciones y mantenimiento. Por eso trabajo con cotización personalizada antes de cerrar un precio.",
   },
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-        <path d="M2 12h20" />
-        <path d="M12 2a15.3 15.3 0 0 1 0 20" />
-        <path d="M12 2a15.3 15.3 0 0 0 0 20" />
-      </svg>
-    ),
-    title: "Registro de Dominios",
-    description:
-      "Asegurá tu identidad digital con el dominio perfecto. Gestión completa de dominios .com, .uy y más.",
-    features: [
-      "Dominios .com, .uy, .com.uy",
-      "Configuración DNS profesional",
-      "Protección de privacidad incluida",
-      "Transferencias y migraciones",
-      "Renovación automatizada",
-    ],
-    featured: false,
+    question: "¿Qué incluye un servicio de diseño web profesional?",
+    answer:
+      "Incluye estructura de contenidos, diseño responsive, desarrollo, configuración técnica, SEO on-page inicial, publicación, formularios de contacto y orientación para que el sitio pueda empezar a recibir consultas reales.",
   },
   {
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-      </svg>
-    ),
-    title: "Correo Corporativo",
-    description:
-      "Email profesional con tu dominio. Proyectá una imagen más seria y confiable para tu negocio.",
-    features: [
-      "Correo con tu dominio (@tuempresa.com)",
-      "Suite de productividad incluida",
-      "Antispam y seguridad avanzada",
-      "Acceso desde cualquier dispositivo",
-      "Soporte técnico dedicado",
-    ],
-    featured: false,
+    question: "¿Trabajás solo en Montevideo?",
+    answer:
+      "No. Trabajo con clientes de todo Uruguay. Puedo desarrollar proyectos para Montevideo, interior del país, instituciones locales, empresas, profesionales, proyectos culturales y marcas con proyección regional.",
+  },
+  {
+    question: "¿Hacés rediseño de sitios existentes?",
+    answer:
+      "Sí. Puedo auditar un sitio actual, conservar lo que funciona y reconstruir lo necesario para mejorar diseño, velocidad, posicionamiento, claridad comercial y capacidad de generar contactos.",
+  },
+  {
+    question: "¿El sitio queda optimizado para Google?",
+    answer:
+      "Sí, el desarrollo contempla metadata, headings, sitemap, schema, velocidad, enlazado interno y contenido alineado con búsquedas reales. El SEO competitivo requiere además contenido continuo, autoridad externa y medición.",
   },
 ];
 
 export default function DesarrolloPage() {
   return (
-    <div className="space-y-14">
-      {/* Hero */}
-      <section className="space-y-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
-          Servicios Digitales
-        </p>
-        <h1 className="text-4xl font-semibold text-zinc-900">Desarrollo Web</h1>
-        <p className="max-w-2xl text-base leading-relaxed text-zinc-600">
-          Soluciones digitales profesionales para tu marca, emprendimiento u organización cultural.
-          Desde el diseño hasta el lanzamiento.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/cotizacion"
-            className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700"
-          >
-            Solicitar cotización
-          </Link>
-          <a
-            href={WA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-700 transition hover:border-green-500 hover:text-green-600"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.89 3.488" />
-            </svg>
-            Consultar por WhatsApp
-          </a>
-        </div>
-      </section>
+    <>
+      <ProfessionalServiceJsonLd />
+      <WebDesignServiceJsonLd />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: BASE_URL },
+          { name: "Diseño web y desarrollo web", url: `${BASE_URL}/desarrollo` },
+        ]}
+      />
 
-      {/* Services grid */}
-      <section>
-        <h2 className="mb-6 text-xl font-semibold text-zinc-900">Nuestros servicios</h2>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <article
-              key={service.title}
-              className={`relative flex flex-col rounded-xl border bg-white p-6 shadow-sm transition hover:shadow-md ${
-                service.featured
-                  ? "border-zinc-900 ring-1 ring-zinc-900/10"
-                  : "border-zinc-200"
-              }`}
-            >
-              {service.featured && (
-                <span className="absolute -top-3 right-4 rounded-full bg-zinc-900 px-3 py-0.5 text-xs font-semibold text-white">
-                  Más solicitado
-                </span>
-              )}
-              <div className="mb-4 text-zinc-700">{service.icon}</div>
-              <h3 className="mb-1 text-base font-semibold text-zinc-900">{service.title}</h3>
-              <p className="mb-4 flex-1 text-sm leading-relaxed text-zinc-500">
-                {service.description}
-              </p>
-              <ul className="mb-5 space-y-1.5">
-                {service.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-zinc-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-zinc-400"><polyline points="20 6 9 17 4 12" /></svg>
-                    {f}
+      <div className="space-y-16">
+        <section className="grid gap-10 md:grid-cols-[1.25fr_0.75fr] md:items-start">
+          <div className="space-y-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+              Diseño web Uruguay · Desarrollo web Uruguay
+            </p>
+            <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-zinc-900 md:text-5xl">
+              Diseño web y desarrollo web profesional en Uruguay
+            </h1>
+            <p className="max-w-3xl text-lg leading-relaxed text-zinc-600">
+              Desarrollo sitios web para empresas, profesionales, instituciones y proyectos
+              culturales que necesitan verse serios, cargar rápido, explicar bien lo que ofrecen y
+              aparecer mejor en Google.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/cotizacion"
+                className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700"
+              >
+                Solicitar cotización web
+              </Link>
+              <a
+                href={WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-zinc-300 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-800 transition hover:border-green-500 hover:text-green-700"
+              >
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <aside className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-zinc-900">Servicios web principales</p>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-600">
+              {projectTypes.map((type) => (
+                <li key={type} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-900" />
+                  <span>{type}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </section>
+
+        <section className="grid gap-5 md:grid-cols-2">
+          {coreServices.map((service) => (
+            <article key={service.title} className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+              <h2 className="text-lg font-semibold text-zinc-900">{service.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-600">{service.description}</p>
+              <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+                {service.items.map((item) => (
+                  <li key={item} className="rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700">
+                    {item}
                   </li>
                 ))}
               </ul>
-              <a
-                href={`https://wa.me/59895342022?text=Hola%20Sergio%2C%20quiero%20informaci%C3%B3n%20sobre%20${encodeURIComponent(service.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-700"
-              >
-                Cotizar
-              </a>
             </article>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* CTA banner */}
-      <section className="rounded-2xl bg-zinc-900 px-8 py-10 text-center text-white">
-        <p className="mb-2 text-sm font-medium uppercase tracking-widest text-zinc-400">
-          ¿Tenés un proyecto?
-        </p>
-        <h2 className="mb-4 text-2xl font-semibold">Hablemos y creamos juntos</h2>
-        <p className="mb-6 text-sm text-zinc-400">
-          Contame tu idea y te doy una propuesta personalizada sin compromiso.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/cotizacion"
-            className="rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-100"
-          >
-            Formulario de cotización
-          </Link>
-          <a
-            href={WA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg border border-white/20 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.89 3.488" />
-            </svg>
-            WhatsApp directo
-          </a>
-        </div>
-      </section>
-    </div>
+        <section className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          <div className="space-y-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+              Diferenciación
+            </p>
+            <h2 className="text-3xl font-semibold text-zinc-900">
+              No alcanza con una web linda: tiene que posicionar, convencer y ser administrable
+            </h2>
+            <p className="text-base leading-relaxed text-zinc-600">
+              En Uruguay hay muchas agencias de diseño web compitiendo por las mismas búsquedas.
+              Mi enfoque combina criterio técnico, comunicación, contenido y lectura territorial
+              para que el sitio no sea una plantilla más, sino una herramienta comercial y
+              reputacional.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {evidence.map((item) => (
+              <div key={item} className="rounded-lg border border-zinc-200 bg-white p-4 text-sm leading-relaxed text-zinc-700">
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+          <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+                Proceso de trabajo
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-zinc-900">
+                Del diagnóstico al lanzamiento
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                Antes de diseñar, ordeno la oferta, las palabras clave, la estructura y las
+                conversiones. Después desarrollo, publico y dejo el sitio preparado para crecer.
+              </p>
+            </div>
+            <ol className="grid gap-4 sm:grid-cols-2">
+              {[
+                "Auditoría de necesidad, competencia y objetivo comercial.",
+                "Mapa de páginas, mensajes, llamadas a la acción y contenidos.",
+                "Diseño responsive, desarrollo y carga inicial de información.",
+                "SEO técnico, formularios, medición, publicación y mantenimiento.",
+              ].map((step, index) => (
+                <li key={step} className="rounded-lg bg-zinc-50 p-4">
+                  <span className="text-xs font-semibold text-zinc-400">Paso {index + 1}</span>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-700">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="space-y-5">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+                Preguntas frecuentes
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-zinc-900">
+                Diseño web en Uruguay: dudas habituales
+              </h2>
+            </div>
+            <Link href="/proyectos" className="text-sm font-semibold text-zinc-600 hover:text-zinc-900">
+              Ver proyectos realizados
+            </Link>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="rounded-xl border border-zinc-200 bg-white p-5">
+                <h3 className="text-base font-semibold text-zinc-900">{faq.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-600">{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl bg-zinc-900 px-8 py-10 text-center text-white">
+          <p className="text-sm font-medium uppercase tracking-widest text-zinc-400">
+            Sitio web profesional en Uruguay
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold md:text-3xl">
+            Pedí una cotización y ordenamos la mejor solución para tu proyecto
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">
+            Puedo ayudarte con diseño web, desarrollo, hosting, dominios, SEO técnico,
+            mantenimiento y estrategia de contenidos.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/cotizacion"
+              className="rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-100"
+            >
+              Cotizar mi página web
+            </Link>
+            <Link
+              href="/contacto"
+              className="rounded-lg border border-white/20 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Contactar
+            </Link>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

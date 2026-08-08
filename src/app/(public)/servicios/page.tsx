@@ -22,6 +22,7 @@ const services = [
     description:
       "Diseño, planificación y coordinación de festivales, ciclos, exposiciones y convocatorias. Gestión de fondos públicos y privados, producción ejecutiva y evaluación de impacto.",
     items: ["Festivales y ciclos", "Convocatorias y fondos", "Producción ejecutiva", "Evaluación de proyectos"],
+    href: "/arma-tu-proyecto",
   },
   {
     category: "Comunicación",
@@ -29,6 +30,7 @@ const services = [
     description:
       "Producción de columnas de opinión, análisis cultural y periodismo especializado. Plan editorial para marcas personales, posicionamiento narrativo y construcción de autoridad.",
     items: ["Columnas de opinión", "Plan editorial", "Marca personal", "Estrategia de contenido"],
+    href: "/columnas",
   },
   {
     category: "Tecnología",
@@ -36,6 +38,7 @@ const services = [
     description:
       "Construcción de sitios y plataformas con Next.js y TypeScript. Arquitectura limpia, SEO técnico, rendimiento y diseño orientado a conversión para profesionales y organizaciones.",
     items: ["Sitios con Next.js", "SEO técnico", "Paneles de gestión", "Optimización y conversión"],
+    href: "/desarrollo",
   },
 ];
 
@@ -68,9 +71,32 @@ export default function ServiciosPage() {
                 </li>
               ))}
             </ul>
+            <Link
+              href={service.href}
+              className="mt-5 inline-flex text-sm font-semibold text-zinc-700 hover:text-zinc-950"
+            >
+              Ver servicio
+            </Link>
           </article>
         ))}
       </div>
+
+      <section className="grid gap-4 md:grid-cols-2">
+        <Link
+          href="/diseno-web-uruguay"
+          className="rounded-xl border border-zinc-200 bg-white p-5 text-sm leading-relaxed text-zinc-600 shadow-sm transition hover:border-zinc-400"
+        >
+          <span className="block text-base font-semibold text-zinc-900">Diseño web Uruguay</span>
+          Páginas profesionales para empresas, instituciones, profesionales y proyectos culturales.
+        </Link>
+        <Link
+          href="/desarrollo-web-uruguay"
+          className="rounded-xl border border-zinc-200 bg-white p-5 text-sm leading-relaxed text-zinc-600 shadow-sm transition hover:border-zinc-400"
+        >
+          <span className="block text-base font-semibold text-zinc-900">Desarrollo web Uruguay</span>
+          Sitios rápidos con Next.js, SEO técnico, formularios, hosting y mantenimiento.
+        </Link>
+      </section>
 
       <div className="rounded-xl border border-zinc-200 bg-white p-6 text-center">
         <p className="text-base font-semibold text-zinc-900">¿Necesitás un servicio a medida?</p>
