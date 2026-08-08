@@ -15,17 +15,64 @@ declare global {
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
+function getCookie(name: string) {
+  const value = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`))
+    ?.split("=")[1];
+
+  return value ? decodeURIComponent(value) : undefined;
+}
+
+function createEventId(source: string) {
+  const random =
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : Math.random().toString(36).slice(2);
+
+  return `${source}_${Date.now()}_${random}`;
+}
+
 export function trackLead(source: string) {
   if (typeof window === "undefined") return;
+
+  const eventId = createEventId(source);
 
   window.gtag?.("event", "generate_lead", {
     event_category: "conversion",
     method: source,
+    event_id: eventId,
   });
 
-  window.fbq?.("track", "Lead", {
-    content_name: source,
+  window.fbq?.(
+    "track",
+    "Lead",
+    {
+      content_name: source,
+    },
+    { eventID: eventId },
+  );
+
+  const payload = JSON.stringify({
+    eventName: "Lead",
+    eventId,
+    source,
+    eventSourceUrl: window.location.href,
+    fbp: getCookie("_fbp"),
+    fbc: getCookie("_fbc"),
   });
+
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon("/api/meta/conversions", new Blob([payload], { type: "application/json" }));
+    return;
+  }
+
+  fetch("/api/meta/conversions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: payload,
+    keepalive: true,
+  }).catch(() => undefined);
 }
 
 export function Analytics() {
