@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { trackLead } from "@/components/analytics";
 
 export function ArmaProyectoForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -31,6 +32,7 @@ export function ArmaProyectoForm() {
       "*Teléfono:* " + (get("contactPhone") || "–") + "\n" +
       "*Comentarios:* " + (get("comments") || "–");
 
+    trackLead("arma_proyecto_form_whatsapp");
     window.open("https://wa.me/59895342022?text=" + encodeURIComponent(msg), "_blank");
   }
 

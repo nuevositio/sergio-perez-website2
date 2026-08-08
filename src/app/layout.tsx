@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lora, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@/components/analytics";
 import "./globals.css";
 
 const lora = Lora({
@@ -88,7 +89,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${lora.variable} ${sourceSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

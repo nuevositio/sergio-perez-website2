@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { trackLead } from "@/components/analytics";
 
 export function CotizacionForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -32,6 +33,7 @@ export function CotizacionForm() {
       "*País:* " + (get("country") || "–") + "\n" +
       "*Notas:* " + (get("extraNotes") || "–");
 
+    trackLead("cotizacion_form_whatsapp");
     window.open("https://wa.me/59895342022?text=" + encodeURIComponent(msg), "_blank");
   }
 

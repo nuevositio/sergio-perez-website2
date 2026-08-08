@@ -1,6 +1,46 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/ig",
+        destination:
+          "/desarrollo?utm_source=instagram&utm_medium=social&utm_campaign=perfil&utm_content=bio",
+        permanent: false,
+      },
+      {
+        source: "/instagram",
+        destination:
+          "/desarrollo?utm_source=instagram&utm_medium=social&utm_campaign=perfil&utm_content=bio",
+        permanent: false,
+      },
+      {
+        source: "/fb",
+        destination:
+          "/desarrollo?utm_source=facebook&utm_medium=social&utm_campaign=perfil&utm_content=page",
+        permanent: false,
+      },
+      {
+        source: "/linkedin",
+        destination:
+          "/desarrollo?utm_source=linkedin&utm_medium=social&utm_campaign=perfil&utm_content=profile",
+        permanent: false,
+      },
+      {
+        source: "/wa",
+        destination:
+          "/cotizacion?utm_source=whatsapp&utm_medium=referral&utm_campaign=consulta_directa",
+        permanent: false,
+      },
+      {
+        source: "/ads-web",
+        destination:
+          "/diseno-web-uruguay?utm_source=meta&utm_medium=paid_social&utm_campaign=diseno_web&utm_content=anuncio",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
