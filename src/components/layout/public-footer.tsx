@@ -120,6 +120,10 @@ export function PublicFooter() {
         </div>
         <div className="border-t border-zinc-200 pt-6 text-xs text-zinc-400">
           <p>© {new Date().getFullYear()} sergioperez.uy — Todos los derechos reservados.</p>
+          <p className="mt-2">
+            SERGIO PÉREZ es una empresa formalmente constituida, habilitada para operar comercialmente y con RUPE
+            activo para contratar con organismos públicos.
+          </p>
         </div>
       </div>
     </footer>
