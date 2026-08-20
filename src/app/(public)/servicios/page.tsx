@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OrganizationJsonLd, ProfessionalServiceJsonLd, ServicesPageJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Servicios — Gestión Cultural, Comunicación y Desarrollo Web",
@@ -42,9 +43,49 @@ const services = [
   },
 ];
 
+const servicePaths = [
+  {
+    need: "Presentar una institución, empresa o marca personal",
+    service: "Diseño y desarrollo web",
+    result: "Presencia digital clara, rápida, medible y preparada para recibir consultas.",
+  },
+  {
+    need: "Profesionalizar una iniciativa cultural",
+    service: "Gestión de proyectos culturales",
+    result: "Formulación, planificación, producción, comunicación y evaluación con criterio técnico.",
+  },
+  {
+    need: "Construir autoridad pública o editorial",
+    service: "Comunicación estratégica",
+    result: "Relato consistente, contenidos de fondo y posicionamiento narrativo verificable.",
+  },
+];
+
+const faqs = [
+  {
+    question: "¿Qué tipo de servicios ofrece Sergio Pérez?",
+    answer:
+      "Sergio Pérez ofrece servicios de gestión cultural, comunicación estratégica, redacción profesional y desarrollo web en Uruguay. El trabajo puede enfocarse en formular proyectos, ordenar una comunicación institucional, construir una plataforma digital o combinar cultura, narrativa y tecnología en una misma estrategia.",
+  },
+  {
+    question: "¿Trabaja con organismos públicos e instituciones?",
+    answer:
+      "Sí. SERGIO PÉREZ es una empresa formalmente constituida, habilitada para operar comercialmente y con RUPE activo para contratar con organismos públicos. También trabaja con proyectos culturales, empresas, profesionales, medios y organizaciones territoriales.",
+  },
+  {
+    question: "¿Cuándo conviene combinar gestión cultural y desarrollo web?",
+    answer:
+      "Conviene combinar ambas áreas cuando un proyecto cultural necesita no solo una idea o una actividad, sino también relato, estructura, presencia digital, formularios, medición, archivo público, comunicación con audiencias y continuidad después del lanzamiento.",
+  },
+];
+
 export default function ServiciosPage() {
   return (
-    <div className="space-y-12">
+    <>
+      <OrganizationJsonLd />
+      <ProfessionalServiceJsonLd />
+      <ServicesPageJsonLd />
+      <div className="space-y-12">
       <section className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Servicios</p>
         <h1 className="text-4xl font-semibold text-zinc-900">En qué puedo ayudarte</h1>
@@ -98,6 +139,43 @@ export default function ServiciosPage() {
         </Link>
       </section>
 
+      <section className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+          Cómo elegir
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold text-zinc-900">
+          Qué servicio necesitás según tu objetivo
+        </h2>
+        <div className="mt-5 grid gap-4">
+          {servicePaths.map((item) => (
+            <article key={item.need} className="grid gap-2 border-t border-zinc-100 pt-4 md:grid-cols-3">
+              <h3 className="text-sm font-semibold text-zinc-900">{item.need}</h3>
+              <p className="text-sm font-medium text-zinc-700">{item.service}</p>
+              <p className="text-sm leading-relaxed text-zinc-600">{item.result}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+            Preguntas frecuentes
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold text-zinc-900">
+            Dudas habituales antes de contratar
+          </h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {faqs.map((item) => (
+            <article key={item.question} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-zinc-900">{item.question}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-600">{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <div className="rounded-xl border border-zinc-200 bg-white p-6 text-center">
         <p className="text-base font-semibold text-zinc-900">¿Necesitás un servicio a medida?</p>
         <p className="mt-2 text-sm text-zinc-600">
@@ -110,6 +188,7 @@ export default function ServiciosPage() {
           Contactame
         </Link>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

@@ -4,6 +4,15 @@
  */
 
 const BASE = "https://www.sergioperez.uy";
+const CONTACT_EMAIL = "yosoy@sergioperez.uy";
+const CONTACT_PHONE = "+59895342022";
+const SAME_AS = [
+  "https://www.instagram.com/sergioperez.uy",
+  "https://www.facebook.com/sergioperez.uy",
+  "https://www.linkedin.com/in/spgestioncultural/",
+  "https://themesh.art/perfil/spgestioncultural/",
+  "https://www.youtube.com/@nuevositiouruguay868",
+];
 
 function JsonLdScript({ schema }: { schema: Record<string, unknown> }) {
   return (
@@ -22,7 +31,7 @@ export function PersonJsonLd() {
     "@id": `${BASE}/#person`,
     name: "Sergio Pérez",
     url: BASE,
-    email: "yosoy@sergioperez.uy",
+    email: CONTACT_EMAIL,
     jobTitle: "Gestor Cultural, Comunicador y Desarrollador Web",
     description:
       "Gestor cultural, columnista y desarrollador web uruguayo. Diseño proyectos culturales, estrategia editorial y plataformas web profesionales.",
@@ -30,12 +39,7 @@ export function PersonJsonLd() {
       "@type": "Country",
       name: "Uruguay",
     },
-    sameAs: [
-      "https://www.instagram.com/sergioperez.uy",
-      "https://www.facebook.com/sergioperez.uy",
-      "https://www.linkedin.com/in/sergioperezuy",
-      "https://themesh.art/perfil/spgestioncultural/",
-    ],
+    sameAs: SAME_AS,
     knowsAbout: [
       "Gestión Cultural",
       "Comunicación Estratégica",
@@ -43,6 +47,50 @@ export function PersonJsonLd() {
       "Periodismo Cultural",
       "Fondos Concursables Uruguay",
     ],
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+// ─── Perfil profesional / About ──────────────────────────────────────────────
+export function ProfilePageJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${BASE}/sobre-mi#profile`,
+    url: `${BASE}/sobre-mi`,
+    name: "Sobre Sergio Pérez",
+    description:
+      "Perfil profesional de Sergio Pérez: gestor cultural, comunicador institucional y desarrollador web uruguayo radicado en Cardona, Soriano.",
+    mainEntity: {
+      "@id": `${BASE}/#person`,
+    },
+    about: {
+      "@id": `${BASE}/#person`,
+    },
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+// ─── Organización / proveedor formal ─────────────────────────────────────────
+export function OrganizationJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${BASE}/#organization`,
+    name: "SERGIO PÉREZ",
+    url: BASE,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
+    founder: { "@id": `${BASE}/#person` },
+    description:
+      "Empresa formalmente constituida, habilitada para operar comercialmente y con RUPE activo para contratar con organismos públicos.",
+    areaServed: [
+      { "@type": "Country", name: "Uruguay" },
+      { "@type": "AdministrativeArea", name: "América Latina" },
+    ],
+    sameAs: SAME_AS,
   };
 
   return <JsonLdScript schema={schema} />;
@@ -80,7 +128,10 @@ export function ProfessionalServiceJsonLd() {
     "@id": `${BASE}/#service`,
     name: "Sergio Pérez — Servicios Profesionales",
     url: `${BASE}/servicios`,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
     provider: { "@id": `${BASE}/#person` },
+    parentOrganization: { "@id": `${BASE}/#organization` },
     areaServed: [
       { "@type": "Country", name: "Uruguay" },
       { "@type": "AdministrativeArea", name: "América Latina" },
@@ -132,8 +183,8 @@ export function WebDesignServiceJsonLd() {
     name: "Diseño web y desarrollo web en Uruguay - Sergio Pérez",
     url: `${BASE}/desarrollo`,
     image: `${BASE}/logoSP.png`,
-    email: "yosoy@sergioperez.uy",
-    telephone: "+59895342022",
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
     priceRange: "$$",
     founder: { "@id": `${BASE}/#person` },
     provider: { "@id": `${BASE}/#person` },
@@ -216,6 +267,113 @@ export function WebDesignServiceJsonLd() {
           itemOffered: { "@type": "Service", name: "SEO técnico" },
         },
       ],
+    },
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+// ─── Página de servicios ─────────────────────────────────────────────────────
+export function ServicesPageJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${BASE}/servicios#webpage`,
+    url: `${BASE}/servicios`,
+    name: "Servicios de gestión cultural, comunicación y desarrollo web",
+    description:
+      "Servicios profesionales de Sergio Pérez en gestión cultural, estrategia editorial, comunicación institucional y desarrollo web en Uruguay.",
+    about: { "@id": `${BASE}/#service` },
+    mainEntity: { "@id": `${BASE}/#service` },
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+interface ProjectItem {
+  name: string;
+  url: string;
+  description: string;
+  category: string;
+}
+
+export function ProjectsItemListJsonLd({ projects }: { projects: ProjectItem[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${BASE}/proyectos#projects`,
+    name: "Portfolio de sitios desarrollados por Sergio Pérez",
+    url: `${BASE}/proyectos`,
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: project.name,
+        url: project.url,
+        description: project.description,
+        genre: project.category,
+        creator: { "@id": `${BASE}/#person` },
+      },
+    })),
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+interface PostListItem {
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedAt: Date | null;
+}
+
+export function ColumnsCollectionJsonLd({ posts }: { posts: PostListItem[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${BASE}/columnas#collection`,
+    url: `${BASE}/columnas`,
+    name: "Columnas de Sergio Pérez",
+    description:
+      "Artículos de opinión e investigación sobre cultura, identidad, política cultural, patrimonio y comunicación estratégica en Uruguay.",
+    isPartOf: { "@id": `${BASE}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.slice(0, 30).map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          url: `${BASE}/columnas/${post.slug}`,
+          author: { "@id": `${BASE}/#person` },
+          ...(post.publishedAt && { datePublished: post.publishedAt.toISOString() }),
+        },
+      })),
+    },
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
+export function ContactPageJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${BASE}/contacto#contact`,
+    url: `${BASE}/contacto`,
+    name: "Contacto — Sergio Pérez",
+    description:
+      "Página de contacto para proyectos culturales, desarrollo web y comunicación estratégica con Sergio Pérez.",
+    mainEntity: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: CONTACT_EMAIL,
+      telephone: CONTACT_PHONE,
+      availableLanguage: ["Spanish", "English", "Portuguese"],
+      areaServed: { "@type": "Country", name: "Uruguay" },
     },
   };
 

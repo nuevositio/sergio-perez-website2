@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { ProjectsItemListJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Proyectos — Desarrollo Web en Uruguay",
@@ -146,7 +147,9 @@ const projects = [
 
 export default function ProyectosPage() {
   return (
-    <div className="space-y-12">
+    <>
+      <ProjectsItemListJsonLd projects={projects} />
+      <div className="space-y-12">
       {/* Header */}
       <section className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Proyectos</p>
@@ -154,6 +157,22 @@ export default function ProyectosPage() {
         <p className="max-w-2xl text-base leading-relaxed text-zinc-600">
           Una selección de plataformas web que diseñé y desarrollé para marcas, empresas y profesionales en Uruguay.
           Pasá el cursor para ver cada proyecto en color.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+          Evidencia de trabajo
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold text-zinc-900">
+          Sitios web para cultura, medios, eventos, industria, turismo y marcas personales
+        </h2>
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-zinc-600">
+          El portfolio de Sergio Pérez reúne sitios desarrollados para eventos deportivos,
+          proyectos culturales, medios de comunicación, empresas industriales, agencias de turismo,
+          ciudades, patrimonio y marcas personales. Cada proyecto combina diseño visual,
+          arquitectura de contenidos, publicación web, criterios de posicionamiento, soporte técnico
+          y una lectura comunicacional del objetivo de cada organización.
         </p>
       </section>
 
@@ -258,6 +277,7 @@ export default function ProyectosPage() {
           </a>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

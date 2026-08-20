@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { OrganizationJsonLd, PersonJsonLd, ProfilePageJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Sobre mí — Sergio Pérez",
@@ -193,7 +194,11 @@ const tools = [
 
 export default function SobreMiPage() {
   return (
-    <div className="mx-auto max-w-5xl space-y-14">
+    <>
+      <PersonJsonLd />
+      <OrganizationJsonLd />
+      <ProfilePageJsonLd />
+      <div className="mx-auto max-w-5xl space-y-14">
       <section className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
         <div className="space-y-6">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">Sobre mí</p>
@@ -241,6 +246,23 @@ export default function SobreMiPage() {
             />
           </div>
         </div>
+      </section>
+
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+          Perfil profesional
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold text-zinc-900">
+          Gestión cultural, comunicación pública y desarrollo digital con base territorial
+        </h2>
+        <p className="mt-3 max-w-4xl text-base leading-relaxed text-zinc-600">
+          Sergio Pérez es gestor cultural, comunicador institucional y desarrollador web uruguayo.
+          Su trabajo combina gestión cultural, patrimonio, territorio, redacción profesional,
+          comunicación pública, SEO técnico y desarrollo digital. Desde Cardona, Soriano, acompaña
+          proyectos culturales, instituciones, empresas y profesionales que necesitan ordenar su
+          comunicación, formular iniciativas, fortalecer su presencia web y construir confianza con
+          públicos reales.
+        </p>
       </section>
 
       <section className="grid gap-5 md:grid-cols-3">
@@ -378,6 +400,7 @@ export default function SobreMiPage() {
         </div>
 
       </section>
-    </div>
+      </div>
+    </>
   );
 }

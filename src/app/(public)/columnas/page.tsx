@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ColumnsCollectionJsonLd } from "@/components/seo/json-ld";
 import { getPublishedPosts } from "@/features/columns/queries";
 
 export const revalidate = 3600; // Revalida cada hora
@@ -20,12 +21,26 @@ export default async function ColumnasPage() {
   const posts = await getPublishedPosts().catch(() => []);
 
   return (
-    <div className="space-y-10">
+    <>
+      <ColumnsCollectionJsonLd posts={posts} />
+      <div className="space-y-10">
       <section className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Columnas</p>
         <h1 className="text-4xl font-semibold text-zinc-900">Escritura y opinión</h1>
         <p className="max-w-2xl text-base leading-relaxed text-zinc-600">
           Artículos de fondo sobre cultura, identidad, política cultural y tecnología.
+        </p>
+      </section>
+
+      <section className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-zinc-900">
+          Lecturas para entender cultura, territorio y comunicación pública
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600">
+          Esta sección reúne columnas de Sergio Pérez sobre gestión cultural, patrimonio,
+          identidad, políticas culturales, comunicación estratégica y desarrollo territorial en
+          Uruguay. Los artículos combinan análisis, experiencia profesional y lectura institucional
+          para aportar contexto a proyectos, debates públicos y procesos comunitarios.
         </p>
       </section>
 
@@ -44,11 +59,11 @@ export default async function ColumnasPage() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
                   {post.category.name}
                 </p>
-                <h2 className="text-xl font-semibold leading-snug text-zinc-900">
+                <h3 className="text-xl font-semibold leading-snug text-zinc-900">
                   <Link href={`/columnas/${post.slug}`} className="hover:text-zinc-600">
                     {post.title}
                   </Link>
-                </h2>
+                </h3>
                 {post.subtitle ? (
                   <p className="text-sm font-medium text-zinc-600">{post.subtitle}</p>
                 ) : null}
@@ -75,6 +90,7 @@ export default async function ColumnasPage() {
           ))}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }

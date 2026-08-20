@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ContactPageJsonLd, OrganizationJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Contacto — Escribime",
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 
 export default function ContactoPage() {
   return (
-    <div className="mx-auto max-w-2xl space-y-10">
+    <>
+      <OrganizationJsonLd />
+      <ContactPageJsonLd />
+      <div className="mx-auto max-w-2xl space-y-10">
       <section className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Contacto</p>
         <h1 className="text-4xl font-semibold text-zinc-900">Hablemos</h1>
@@ -34,10 +38,10 @@ export default function ContactoPage() {
             <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-400">Email</dt>
             <dd className="mt-1">
               <a
-                href="mailto:sp.gestioncultural@gmail.com"
+                href="mailto:yosoy@sergioperez.uy"
                 className="text-zinc-900 underline underline-offset-2 hover:text-zinc-600"
               >
-                sp.gestioncultural@gmail.com
+                yosoy@sergioperez.uy
               </a>
             </dd>
           </div>
@@ -51,6 +55,13 @@ export default function ContactoPage() {
               Abierto a colaboraciones puntuales y proyectos de mediana y larga duración.
             </dd>
           </div>
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-400">Contratación pública</dt>
+            <dd className="mt-1 text-sm text-zinc-600">
+              SERGIO PÉREZ es una empresa formalmente constituida, habilitada para operar
+              comercialmente y con RUPE activo.
+            </dd>
+          </div>
         </dl>
       </div>
 
@@ -61,6 +72,7 @@ export default function ContactoPage() {
         </Link>{" "}
         para ver cómo puedo ayudarte antes de escribir.
       </p>
-    </div>
+      </div>
+    </>
   );
 }

@@ -135,6 +135,13 @@ export default function DesarrolloPage() {
               culturales que necesitan verse serios, cargar rápido, explicar bien lo que ofrecen y
               aparecer mejor en Google.
             </p>
+            <p className="max-w-3xl rounded-xl border border-zinc-200 bg-white p-4 text-sm leading-relaxed text-zinc-600 shadow-sm">
+              El servicio de diseño y desarrollo web de Sergio Pérez en Uruguay combina estrategia
+              de contenidos, diseño responsive, desarrollo con Next.js, SEO técnico, hosting,
+              dominios y mantenimiento. Está orientado a empresas, profesionales, instituciones y
+              proyectos culturales que necesitan una presencia digital clara, rápida, administrable
+              y preparada para generar consultas reales.
+            </p>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/cotizacion"

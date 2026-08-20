@@ -43,6 +43,24 @@ const deliverables = [
   "Publicación, dominio, hosting, SSL y soporte posterior.",
 ];
 
+const faqs = [
+  {
+    question: "¿Qué diferencia a una página web profesional de una web básica?",
+    answer:
+      "Una página profesional no se limita a verse bien. Ordena la oferta, explica el valor del proyecto, funciona correctamente en móvil, carga rápido, tiene llamados a la acción, metadata, estructura de headings, schema, enlaces internos y una base preparada para medición y posicionamiento.",
+  },
+  {
+    question: "¿Para quién está pensado el diseño web en Uruguay?",
+    answer:
+      "Está pensado para empresas, instituciones, profesionales independientes, marcas personales, artistas, emprendimientos y proyectos culturales que necesitan proyectar confianza, explicar servicios y recibir consultas desde Google, redes sociales, WhatsApp o campañas específicas.",
+  },
+  {
+    question: "¿El diseño incluye contenido y estructura comercial?",
+    answer:
+      "Sí. El trabajo contempla ordenar secciones, jerarquizar mensajes, redactar o ajustar textos principales, definir llamados a la acción y organizar la navegación para que la página sea entendible para personas, buscadores y sistemas de búsqueda asistidos por IA.",
+  },
+];
+
 export default function DisenoWebUruguayPage() {
   return (
     <>
@@ -66,6 +84,12 @@ export default function DisenoWebUruguayPage() {
             Diseño páginas web para empresas, profesionales, instituciones, artistas,
             emprendimientos y proyectos culturales que necesitan una imagen seria, una oferta clara
             y un sitio preparado para recibir consultas.
+          </p>
+          <p className="max-w-3xl rounded-xl border border-zinc-200 bg-white p-4 text-sm leading-relaxed text-zinc-600 shadow-sm">
+            El diseño web profesional en Uruguay debe vender confianza antes que estética. Sergio
+            Pérez diseña páginas claras, responsive y preparadas para Google, orientadas a explicar
+            servicios, mostrar trayectoria, ordenar contenidos y convertir visitas en consultas
+            reales por formulario, WhatsApp o email.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -141,6 +165,25 @@ export default function DisenoWebUruguayPage() {
             >
               Solicitar cotización
             </Link>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+              Preguntas frecuentes
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold text-zinc-900">
+              Dudas sobre diseño web profesional
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {faqs.map((item) => (
+              <article key={item.question} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+                <h3 className="text-base font-semibold text-zinc-900">{item.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-600">{item.answer}</p>
+              </article>
+            ))}
           </div>
         </section>
       </div>

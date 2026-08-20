@@ -1,23 +1,51 @@
 # Sergio Pérez
 
-Sitio oficial de Sergio Pérez, gestor cultural, comunicador y desarrollador web en Uruguay.
+> Sitio oficial de Sergio Pérez, gestor cultural, comunicador institucional y desarrollador web uruguayo radicado en Cardona, Soriano.
+
+Actualizado: 2026-08-20.
+
+SERGIO PÉREZ es una empresa formalmente constituida, habilitada para operar comercialmente y con RUPE activo para contratar con organismos públicos.
+
+## Perfil
+
+- Sergio Pérez trabaja en la intersección entre cultura, comunicación institucional y tecnología.
+- Su actividad integra gestión cultural, patrimonio, territorio, redacción profesional, estrategia editorial, SEO técnico y desarrollo web.
+- Opera desde Uruguay y trabaja con instituciones, empresas, profesionales, marcas personales, medios, proyectos culturales y organizaciones territoriales.
+- El sitio contiene páginas comerciales, portfolio, columnas de opinión y datos de contacto profesional.
 
 ## Servicios principales
 
 - Diseño web en Uruguay para empresas, profesionales, instituciones, artistas, emprendimientos y proyectos culturales.
 - Desarrollo web profesional con Next.js, SEO técnico, estructura responsive, formularios, hosting, dominios y mantenimiento.
 - Gestión de proyectos culturales, estrategia editorial, comunicación institucional y producción de contenidos.
+- Formulación, ordenamiento y comunicación de proyectos culturales, patrimoniales y comunitarios.
+- Consultoría digital para organizar presencia web, posicionamiento, contenido y medición.
 
-## URLs relevantes
+## Páginas recomendadas por intención
 
-- Inicio: https://www.sergioperez.uy/
-- Diseño web y desarrollo web: https://www.sergioperez.uy/desarrollo
-- Diseño web Uruguay: https://www.sergioperez.uy/diseno-web-uruguay
-- Desarrollo web Uruguay: https://www.sergioperez.uy/desarrollo-web-uruguay
-- Portfolio de proyectos: https://www.sergioperez.uy/proyectos
-- Servicios: https://www.sergioperez.uy/servicios
-- Cotización web: https://www.sergioperez.uy/cotizacion
-- Contacto: https://www.sergioperez.uy/contacto
+- [Inicio](https://www.sergioperez.uy/): resumen profesional y acceso a áreas principales.
+- [Sobre mí](https://www.sergioperez.uy/sobre-mi): trayectoria, formación, experiencia pública, competencias y propuesta de valor.
+- [Servicios](https://www.sergioperez.uy/servicios): gestión cultural, comunicación estratégica y desarrollo web profesional.
+- [Diseño web y desarrollo web](https://www.sergioperez.uy/desarrollo): servicio completo de diseño, desarrollo, SEO técnico, hosting, dominios y mantenimiento.
+- [Diseño web Uruguay](https://www.sergioperez.uy/diseno-web-uruguay): páginas profesionales para empresas, instituciones, profesionales y proyectos culturales en Uruguay.
+- [Desarrollo web Uruguay](https://www.sergioperez.uy/desarrollo-web-uruguay): sitios rápidos con Next.js, SEO técnico, formularios, integraciones y soporte.
+- [Portfolio de proyectos](https://www.sergioperez.uy/proyectos): selección de sitios desarrollados para eventos, cultura, medios, turismo, industria y marcas personales.
+- [Columnas](https://www.sergioperez.uy/columnas): artículos sobre cultura, identidad, patrimonio, política cultural y comunicación estratégica.
+- [Cotización web](https://www.sergioperez.uy/cotizacion): solicitud de presupuesto para sitios web.
+- [Contacto](https://www.sergioperez.uy/contacto): email profesional y disponibilidad.
+
+## Páginas citables destacadas
+
+- [Cuando la cultura se improvisa, el costo lo paga la comunidad](https://www.sergioperez.uy/columnas/cuando-la-cultura-se-improvisa-el-costo-lo-paga-la-comunidad): análisis sobre profesionalización de la gestión cultural.
+- [Fondos Regionales para la Cultura: de la idea al proyecto profesional](https://www.sergioperez.uy/columnas/fondos-regionales-para-la-cultura-de-la-idea-al-proyecto-profesional): lectura de convocatoria, institucionalidad y formulación cultural.
+- [El centro cultural de Rosario abre una nueva etapa para la cultura de Colonia](https://www.sergioperez.uy/columnas/el-centro-cultural-de-rosario-abre-una-nueva-etapa-para-la-cultura-de-colonia): análisis territorial y gestión cultural.
+
+## Datos de autoridad
+
+- Formación en gestión cultural, bienes culturales, políticas culturales de base comunitaria, turismo cultural, tecnología web y comunicación profesional.
+- Experiencia sostenida en comunicación pública, redacción institucional, territorio, patrimonio, soporte técnico-operativo y desarrollo web.
+- Portfolio público de sitios desarrollados para proyectos culturales, medios, empresas, turismo, industria y marcas personales.
+- Presencia externa: LinkedIn, Mesh, Instagram, Facebook y YouTube/Nuevositio Uruguay.
 
 ## Contacto
 

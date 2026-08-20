@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedPosts } from "@/features/columns/queries";
-import { PersonJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
+import { OrganizationJsonLd, PersonJsonLd, WebSiteJsonLd } from "@/components/seo/json-ld";
 import TypewriterText from "@/components/typewriter-text";
 
 export const metadata: Metadata = {
@@ -46,6 +46,7 @@ export default async function HomePage() {
   return (
     <>
       <PersonJsonLd />
+      <OrganizationJsonLd />
       <WebSiteJsonLd />
       <div className="space-y-24">
       {/* Hero */}
@@ -55,6 +56,9 @@ export default async function HomePage() {
             Gestor cultural · Comunicador · Desarrollador
           </p>
           <h1 className="text-4xl font-semibold leading-[1.15] text-zinc-900 md:text-5xl">
+            Gestión cultural, comunicación estratégica y desarrollo web en Uruguay
+          </h1>
+          <p className="min-h-[1.6rem] text-base font-semibold text-zinc-700 md:text-lg">
             <TypewriterText
               texts={[
                 "Gestión cultural con criterio profesional.",
@@ -63,7 +67,7 @@ export default async function HomePage() {
                 "Proyectos culturales con impacto real.",
               ]}
             />
-          </h1>
+          </p>
           <p className="text-base leading-relaxed text-zinc-600 md:text-lg">
             Trabajo en la intersección entre cultura, narrativa y tecnología para construir
             proyectos con identidad clara, audiencias fieles y resultados concretos.
@@ -91,6 +95,25 @@ export default async function HomePage() {
               <p className="mt-1 text-sm leading-relaxed text-zinc-600">{area.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="max-w-3xl space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+            Quién es Sergio Pérez
+          </p>
+          <h2 className="text-2xl font-semibold text-zinc-900">
+            Un perfil híbrido para proyectos culturales, institucionales y digitales
+          </h2>
+          <p className="text-base leading-relaxed text-zinc-600">
+            Sergio Pérez es gestor cultural, comunicador institucional y desarrollador web uruguayo
+            radicado en Cardona, Soriano. Trabaja con proyectos culturales, comunicación pública,
+            patrimonio, estrategia editorial y plataformas web para instituciones, empresas,
+            profesionales y organizaciones territoriales. Su enfoque combina criterio cultural,
+            redacción profesional, soporte técnico, SEO, analítica y desarrollo digital para crear
+            proyectos claros, sostenibles y preparados para generar confianza.
+          </p>
         </div>
       </section>
 

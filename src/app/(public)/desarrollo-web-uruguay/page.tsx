@@ -57,6 +57,24 @@ const scopes = [
   "Optimización técnica de sitios existentes",
 ];
 
+const faqs = [
+  {
+    question: "¿Qué incluye el desarrollo web profesional?",
+    answer:
+      "Incluye estructura técnica, desarrollo responsive, configuración de metadata, sitemap, robots, schema, formularios, analítica, publicación, dominio, hosting, SSL y una base preparada para mantenimiento, mejoras y crecimiento posterior.",
+  },
+  {
+    question: "¿Por qué usar Next.js para un sitio profesional?",
+    answer:
+      "Next.js permite construir sitios rápidos, estructurados y mantenibles, con buen rendimiento, rutas claras, renderizado optimizado, componentes reutilizables y una base técnica adecuada para SEO, contenido editorial, formularios e integraciones.",
+  },
+  {
+    question: "¿El desarrollo queda preparado para buscadores e IA?",
+    answer:
+      "Sí. El desarrollo contempla texto visible, jerarquía de headings, metadata, datos estructurados, sitemap, robots, enlaces internos y rendimiento. Para competir en buscadores e IA, esa base técnica debe acompañarse con contenido útil, evidencia y actualización continua.",
+  },
+];
+
 export default function DesarrolloWebUruguayPage() {
   return (
     <>
@@ -81,6 +99,12 @@ export default function DesarrolloWebUruguayPage() {
               Desarrollo sitios web modernos para proyectos que necesitan velocidad, orden técnico,
               posicionamiento, formularios funcionales y una base preparada para crecer sin depender
               de parches improvisados.
+            </p>
+            <p className="rounded-xl border border-zinc-200 bg-white p-4 text-sm leading-relaxed text-zinc-600 shadow-sm">
+              El desarrollo web profesional de Sergio Pérez en Uruguay combina Next.js, SEO técnico,
+              formularios, integraciones, hosting, dominios, mantenimiento y arquitectura de
+              contenidos. El objetivo es construir sitios rápidos, legibles para buscadores,
+              preparados para medición y capaces de sostener una presencia digital seria.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -149,6 +173,25 @@ export default function DesarrolloWebUruguayPage() {
             >
               Pedir propuesta
             </Link>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+              Preguntas frecuentes
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold text-zinc-900">
+              Dudas sobre desarrollo web técnico
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {faqs.map((item) => (
+              <article key={item.question} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+                <h3 className="text-base font-semibold text-zinc-900">{item.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-600">{item.answer}</p>
+              </article>
+            ))}
           </div>
         </section>
       </div>
