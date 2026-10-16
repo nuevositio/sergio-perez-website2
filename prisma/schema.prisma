@@ -133,3 +133,22 @@ model PlannedInvestment {
 
   @@index([plannedDate])
 }
+
+// Borradores generados desde /arma-tu-proyecto (copia para el admin)
+model ProjectDraft {
+  id           String   @id @default(cuid())
+  code         String   @unique
+  projectTitle String
+  discipline   String
+  contactName  String
+  contactEmail String
+  contactPhone String?
+  input        Json
+  draft        String   @db.Text
+  model        String?
+  ipHash       String?
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([ipHash, createdAt])
+}

@@ -6,6 +6,7 @@ const links = [
   { href: "/admin/dashboard", label: "Dashboard" },
   { href: "/admin/columnas", label: "Columnas" },
   { href: "/admin/columnas/nueva", label: "Nueva columna" },
+  { href: "/admin/borradores", label: "Borradores de proyectos" },
   { href: "/admin/accounting", label: "💰 Contabilidad" },
 ];
 

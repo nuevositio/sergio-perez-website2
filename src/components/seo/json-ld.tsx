@@ -273,6 +273,50 @@ export function WebDesignServiceJsonLd() {
   return <JsonLdScript schema={schema} />;
 }
 
+// ─── Armá tu proyecto cultural ───────────────────────────────────────────────
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export function CulturalProjectServiceJsonLd({ faqs }: { faqs: FaqItem[] }) {
+  const url = `${BASE}/arma-tu-proyecto`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: "Borrador de proyecto cultural y orientación para fondos concursables",
+        serviceType: "Formulación de proyectos culturales",
+        description:
+          "Generación de un borrador desarrollado de proyecto cultural y orientación metodológica para presentarlo a FONAM, Fondos Concursables para la Cultura del MEC, Fondos de Incentivo Cultural, programas Iber y otras convocatorias.",
+        url,
+        provider: { "@id": `${BASE}/#person` },
+        areaServed: { "@type": "Country", name: "Uruguay" },
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: url,
+          servicePhone: CONTACT_PHONE,
+          availableLanguage: "Spanish",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        url,
+        mainEntity: faqs.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      },
+    ],
+  };
+
+  return <JsonLdScript schema={schema} />;
+}
+
 // ─── Página de servicios ─────────────────────────────────────────────────────
 export function ServicesPageJsonLd() {
   const schema = {
