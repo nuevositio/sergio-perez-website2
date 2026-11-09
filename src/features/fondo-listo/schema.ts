@@ -107,6 +107,12 @@ export type Chequeo = z.infer<typeof chequeoSchema>;
 
 // ─── Planes ────────────────────────────────────────────────────────────────
 
+// Links de pago de Mercado Pago (monto fijo). Si un plan no tiene link, el pedido se cierra por WhatsApp.
+export const LINKS_PAGO: Record<"listo" | "revision", string | null> = {
+  listo: "https://mpago.la/2w9NxGh",
+  revision: "https://mpago.la/1Kwjk2W",
+};
+
 export const PLANES = {
   listo: {
     nombre: "Proyecto Listo",

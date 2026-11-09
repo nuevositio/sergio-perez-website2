@@ -14,6 +14,8 @@ type Props = {
   plan: string | null;
   proyecto: string | null;
   paymentId: string | null;
+  linkPago: string | null;
+  monto: string | null;
 };
 
 export function ProyectoView(props: Props) {
@@ -75,7 +77,9 @@ ${cuerpo.current?.innerHTML ?? ""}
     URL.revokeObjectURL(url);
   }
 
-  const waTexto = `Hola Sergio, tengo una consulta sobre mi proyecto "${props.titulo}" (código ${props.code}).`;
+  const waTexto = props.linkPago
+    ? `Hola Sergio, ya pagué Fondo Listo para mi proyecto "${props.titulo}". Mi código es ${props.code}. Te adjunto el comprobante.`
+    : `Hola Sergio, tengo una consulta sobre mi proyecto "${props.titulo}" (código ${props.code}).`;
 
   return (
     <div className="space-y-6">
@@ -87,11 +91,36 @@ ${cuerpo.current?.innerHTML ?? ""}
 
       {fase === "esperando" && (
         <section className="space-y-3 rounded-xl border border-zinc-200 bg-white p-6">
-          <h2 className="text-xl font-semibold text-zinc-900">Esperando la confirmación del pago</h2>
-          <p className="text-zinc-600">
-            Cuando el pago se confirme, tu proyecto se escribe en esta misma página. Guardá esta dirección. Si ya pagaste,
-            probá de nuevo en unos minutos.
-          </p>
+          {props.linkPago ? (
+            <>
+              <h2 className="text-xl font-semibold text-zinc-900">Último paso: el pago</h2>
+              <p className="text-zinc-600">
+                Pagá {props.monto ?? ""} con Mercado Pago (tarjeta, débito o efectivo). Cuando el pago se acredite,
+                habilitamos tu proyecto y se escribe en esta misma página. <strong>Guardá esta dirección</strong> para
+                volver.
+              </p>
+              <p className="text-sm text-zinc-600">
+                Tu código de pedido es <strong className="font-mono">{props.code}</strong>. Para habilitarlo más rápido,
+                mandanos el comprobante por WhatsApp con ese código.
+              </p>
+              <a
+                href={props.linkPago}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-lg bg-[#009ee3] px-5 py-3 text-sm font-semibold text-white"
+              >
+                Pagar {props.monto ?? ""} con Mercado Pago
+              </a>
+            </>
+          ) : (
+            <>
+              <h2 className="text-xl font-semibold text-zinc-900">Esperando la confirmación del pago</h2>
+              <p className="text-zinc-600">
+                Cuando el pago se confirme, tu proyecto se escribe en esta misma página. Guardá esta dirección. Si ya
+                pagaste, probá de nuevo en unos minutos.
+              </p>
+            </>
+          )}
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={escribir} className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white">
               Ya pagué, revisar

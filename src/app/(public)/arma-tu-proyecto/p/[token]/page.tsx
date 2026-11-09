@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getConvocatoria } from "@/features/fondo-listo/convocatorias";
 import { ProyectoView } from "@/features/fondo-listo/proyecto-view";
+import { LINKS_PAGO, PLANES, formatoPesos } from "@/features/fondo-listo/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +34,8 @@ export default async function ProyectoPage(props: {
       plan={s.plan}
       proyecto={s.estado === "generado" ? s.proyecto : null}
       paymentId={paymentId}
+      linkPago={s.estado === "pago_pendiente" && s.plan && s.plan in LINKS_PAGO ? LINKS_PAGO[s.plan as keyof typeof LINKS_PAGO] : null}
+      monto={s.plan && s.plan in PLANES ? formatoPesos(PLANES[s.plan as keyof typeof PLANES].precio) : null}
     />
   );
 }

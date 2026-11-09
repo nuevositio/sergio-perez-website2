@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getConvocatoria } from "@/features/fondo-listo/convocatorias";
-import { PLANES, formatoPesos } from "@/features/fondo-listo/schema";
+import { LINKS_PAGO, PLANES, formatoPesos } from "@/features/fondo-listo/schema";
 import { crearPreferencia, mercadoPagoActivo, WHATSAPP } from "@/features/fondo-listo/server";
 
 export const runtime = "nodejs";
@@ -35,6 +35,11 @@ export async function POST(request: NextRequest) {
       console.error("[fondo-listo] preferencia de Mercado Pago", e);
       // Si Mercado Pago falla, se ofrece el pago por WhatsApp
     }
+  }
+
+  // Link de pago fijo: la persona paga desde su página privada y Sergio marca el pago en /admin/fondo-listo
+  if (LINKS_PAGO[plan]) {
+    return NextResponse.json({ url: `/arma-tu-proyecto/p/${s.token}` });
   }
 
   const conv = getConvocatoria(s.convocatoria);
