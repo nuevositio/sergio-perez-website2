@@ -4,6 +4,7 @@
  */
 
 const BASE = "https://www.sergioperez.uy";
+const CONTACT_PHONE = "+59895342022";
 
 function JsonLdScript({ schema }: { schema: Record<string, unknown> }) {
   return (

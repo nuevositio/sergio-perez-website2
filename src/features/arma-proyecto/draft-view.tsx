@@ -47,7 +47,7 @@ function inline(text: string): ReactNode[] {
   });
 }
 
-function DraftBody({ markdown }: { markdown: string }) {
+export function DraftBody({ markdown }: { markdown: string }) {
   return parse(markdown).map((block, i) => {
     switch (block.type) {
       case "h1":

@@ -152,3 +152,32 @@ model ProjectDraft {
   @@index([createdAt])
   @@index([ipHash, createdAt])
 }
+
+// Fondo Listo (/arma-tu-proyecto): entrevista → chequeo gratis → pago → proyecto completo
+model FondoListoSolicitud {
+  id            String    @id @default(cuid())
+  code          String    @unique
+  token         String    @unique
+  convocatoria  String
+  titulo        String
+  nombre        String
+  email         String
+  telefono      String?
+  respuestas    Json
+  chequeo       Json?
+  // chequeo | pago_pendiente | pagado | generando | generado
+  estado        String    @default("chequeo")
+  plan          String?
+  monto         Int?
+  mpPreferencia String?
+  mpPago        String?
+  pagadoAt      DateTime?
+  proyecto      String?   @db.Text
+  modelo        String?
+  ipHash        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([createdAt])
+  @@index([ipHash, createdAt])
+}
