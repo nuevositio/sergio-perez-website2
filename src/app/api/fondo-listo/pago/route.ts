@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
+import { correoPlanElegido } from "@/features/fondo-listo/correo";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getConvocatoria } from "@/features/fondo-listo/convocatorias";
@@ -25,6 +26,7 @@ export async function POST(request: NextRequest) {
     where: { id: s.id },
     data: { plan, monto: p.precio, estado: "pago_pendiente" },
   });
+  if (s.estado === "chequeo" || s.plan !== plan) after(() => correoPlanElegido(s, plan));
 
   if (mercadoPagoActivo()) {
     try {

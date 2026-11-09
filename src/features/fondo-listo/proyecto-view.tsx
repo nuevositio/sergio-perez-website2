@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { DraftBody } from "@/features/arma-proyecto/draft-view";
+import { PLANES, formatoPesos, type PlanId } from "./schema";
 
 const WHATSAPP = "59895342022";
 
@@ -16,6 +17,7 @@ type Props = {
   paymentId: string | null;
   linkPago: string | null;
   monto: string | null;
+  chequeo: { total: number; maximo: number; minimo: string | null; texto: string } | null;
 };
 
 export function ProyectoView(props: Props) {
@@ -24,6 +26,23 @@ export function ProyectoView(props: Props) {
     props.proyecto ? "listo" : "esperando",
   );
   const iniciado = useRef(false);
+  const [eligiendo, setEligiendo] = useState<PlanId | null>(null);
+
+  async function elegir(plan: PlanId) {
+    setEligiendo(plan);
+    try {
+      const res = await fetch("/api/fondo-listo/pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: props.token, plan }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data.whatsapp && data.url) window.open(data.url, "_blank", "noopener");
+      window.location.reload();
+    } catch {
+      setEligiendo(null);
+    }
+  }
   const cuerpo = useRef<HTMLDivElement>(null);
 
   async function escribir() {
@@ -89,7 +108,39 @@ ${cuerpo.current?.innerHTML ?? ""}
         <p className="font-mono text-xs text-zinc-500">{props.code}</p>
       </div>
 
-      {fase === "esperando" && (
+      {fase === "esperando" && props.chequeo && (
+        <section className="space-y-5 rounded-xl border border-zinc-200 bg-white p-6">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Tu chequeo</p>
+            <p className="font-serif text-5xl tabular-nums text-zinc-900">
+              {props.chequeo.total}
+              <span className="text-2xl text-zinc-400"> / {props.chequeo.maximo}</span>
+            </p>
+            {props.chequeo.minimo ? <p className="text-sm text-zinc-500">Mínimo: {props.chequeo.minimo}.</p> : null}
+            <p className="text-zinc-600">{props.chequeo.texto}</p>
+          </div>
+          <div className="space-y-3 border-t border-zinc-100 pt-5">
+            <h2 className="text-xl font-semibold text-zinc-900">Elegí tu plan</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {(Object.keys(PLANES) as PlanId[]).map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  disabled={eligiendo !== null}
+                  onClick={() => elegir(id)}
+                  className="grid gap-1 rounded-lg border border-zinc-200 p-4 text-left hover:border-zinc-900"
+                >
+                  <span className="font-semibold text-zinc-900">{PLANES[id].nombre}</span>
+                  <span className="text-sm text-zinc-600">{formatoPesos(PLANES[id].precio)}</span>
+                  <span className="text-xs text-zinc-400">{eligiendo === id ? "Un momento…" : PLANES[id].incluye[0]}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {fase === "esperando" && !props.chequeo && (
         <section className="space-y-3 rounded-xl border border-zinc-200 bg-white p-6">
           {props.linkPago ? (
             <>

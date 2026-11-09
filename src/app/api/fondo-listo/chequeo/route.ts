@@ -1,4 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { after } from "next/server";
+import { correoChequeo } from "@/features/fondo-listo/correo";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -86,7 +88,7 @@ export async function POST(request: NextRequest) {
   const code = nuevoCodigo();
   const token = nuevoToken();
   try {
-    await prisma.fondoListoSolicitud.create({
+    const creada = await prisma.fondoListoSolicitud.create({
       data: {
         code,
         token,
@@ -101,6 +103,7 @@ export async function POST(request: NextRequest) {
         ipHash,
       },
     });
+    after(() => correoChequeo(creada, chequeo));
   } catch (e) {
     console.error("[fondo-listo] no se pudo guardar", e);
     return error("No pudimos guardar tu chequeo. Probá de nuevo en un rato.", 503);

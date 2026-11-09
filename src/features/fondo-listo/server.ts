@@ -98,9 +98,13 @@ export async function verificarPago(paymentId: string) {
   if (!s || !s.monto) return false;
   if (pago.currency_id !== "UYU" || Math.round(pago.transaction_amount) < s.monto) return false;
 
-  await prisma.fondoListoSolicitud.updateMany({
+  const r = await prisma.fondoListoSolicitud.updateMany({
     where: { id: s.id, estado: { in: ["chequeo", "pago_pendiente"] } },
     data: { estado: "pagado", mpPago: paymentId, pagadoAt: new Date() },
   });
+  if (r.count > 0) {
+    const { correoPagado } = await import("./correo");
+    await correoPagado({ ...s, estado: "pagado" });
+  }
   return true;
 }

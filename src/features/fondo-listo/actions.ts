@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { PLANES, type PlanId } from "./schema";
+import { correoPagado } from "./correo";
 
 async function requireAdmin() {
   const session = (await cookies()).get("admin_session");
@@ -18,9 +19,13 @@ export async function marcarPagado(formData: FormData) {
   const id = String(formData.get("id") ?? "");
   const plan = String(formData.get("plan") ?? "listo") as PlanId;
   if (!id || !(plan in PLANES)) return;
-  await prisma.fondoListoSolicitud.updateMany({
+  const r = await prisma.fondoListoSolicitud.updateMany({
     where: { id, estado: { in: ["chequeo", "pago_pendiente"] } },
     data: { estado: "pagado", plan, monto: PLANES[plan].precio, pagadoAt: new Date() },
   });
+  if (r.count > 0) {
+    const s = await prisma.fondoListoSolicitud.findUnique({ where: { id } });
+    if (s) await correoPagado(s);
+  }
   revalidatePath("/admin/fondo-listo");
 }
