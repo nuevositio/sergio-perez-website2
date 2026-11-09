@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { PLANES, type PlanId } from "./schema";
 import { correoPagado } from "./correo";
+import { enviarCompraMeta } from "./meta";
 
 async function requireAdmin() {
   const session = (await cookies()).get("admin_session");
@@ -25,7 +26,7 @@ export async function marcarPagado(formData: FormData) {
   });
   if (r.count > 0) {
     const s = await prisma.fondoListoSolicitud.findUnique({ where: { id } });
-    if (s) await correoPagado(s);
+    if (s) await Promise.all([correoPagado(s), enviarCompraMeta(s)]);
   }
   revalidatePath("/admin/fondo-listo");
 }

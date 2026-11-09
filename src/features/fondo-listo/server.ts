@@ -103,8 +103,8 @@ export async function verificarPago(paymentId: string) {
     data: { estado: "pagado", mpPago: paymentId, pagadoAt: new Date() },
   });
   if (r.count > 0) {
-    const { correoPagado } = await import("./correo");
-    await correoPagado({ ...s, estado: "pagado" });
+    const [{ correoPagado }, { enviarCompraMeta }] = await Promise.all([import("./correo"), import("./meta")]);
+    await Promise.all([correoPagado({ ...s, estado: "pagado" }), enviarCompraMeta(s)]);
   }
   return true;
 }

@@ -33,6 +33,39 @@ function createEventId(source: string) {
   return `${source}_${Date.now()}_${random}`;
 }
 
+/** Evento de Meta (píxel + API de conversiones con el mismo event_id) y de GA4. */
+export function trackEvent(
+  eventName: "Lead" | "InitiateCheckout",
+  source: string,
+  extra: { value?: number; currency?: string } = {},
+) {
+  if (typeof window === "undefined") return;
+  const eventId = createEventId(source);
+  window.gtag?.("event", eventName === "Lead" ? "generate_lead" : "begin_checkout", {
+    method: source,
+    event_id: eventId,
+    ...extra,
+  });
+  window.fbq?.("track", eventName, { content_name: source, ...extra }, { eventID: eventId });
+  const payload = JSON.stringify({
+    eventName,
+    eventId,
+    source,
+    value: extra.value,
+    currency: extra.currency,
+    eventSourceUrl: window.location.href,
+    fbp: getCookie("_fbp"),
+    fbc: getCookie("_fbc"),
+  });
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon("/api/meta/conversions", new Blob([payload], { type: "application/json" }));
+    return;
+  }
+  fetch("/api/meta/conversions", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }).catch(
+    () => undefined,
+  );
+}
+
 export function trackLead(source: string) {
   if (typeof window === "undefined") return;
 

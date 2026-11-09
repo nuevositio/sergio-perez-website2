@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const META_API_VERSION = "v26.0";
 
-const allowedEvents = new Set(["Lead", "Contact", "PageView"]);
+const allowedEvents = new Set(["Lead", "Contact", "PageView", "InitiateCheckout"]);
 
 interface MetaEventPayload {
   eventName?: string;
@@ -11,6 +11,8 @@ interface MetaEventPayload {
   eventSourceUrl?: string;
   fbp?: string;
   fbc?: string;
+  value?: number;
+  currency?: string;
 }
 
 function getIp(request: NextRequest) {
@@ -61,6 +63,9 @@ export async function POST(request: NextRequest) {
         user_data: userData,
         custom_data: {
           content_name: body.source ?? "site_lead",
+          ...(typeof body.value === "number" && body.value > 0 && body.value < 1_000_000
+            ? { value: body.value, currency: "UYU" }
+            : {}),
         },
       },
     ],

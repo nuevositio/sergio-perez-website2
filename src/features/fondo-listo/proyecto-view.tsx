@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { DraftBody } from "@/features/arma-proyecto/draft-view";
 import { PLANES, formatoPesos, type PlanId } from "./schema";
+import { trackEvent } from "@/components/analytics";
 
 const WHATSAPP = "59895342022";
 
@@ -29,6 +30,7 @@ export function ProyectoView(props: Props) {
   const [eligiendo, setEligiendo] = useState<PlanId | null>(null);
 
   async function elegir(plan: PlanId) {
+    trackEvent("InitiateCheckout", `fondo-listo-${plan}`, { value: PLANES[plan].precio, currency: "UYU" });
     setEligiendo(plan);
     try {
       const res = await fetch("/api/fondo-listo/pago", {

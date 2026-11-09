@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CONVOCATORIAS, estadoDe, getConvocatoria } from "./convocatorias";
 import { PLANES, PREGUNTAS, formatoPesos, type Chequeo, type PlanId } from "./schema";
+import { trackEvent } from "@/components/analytics";
 
 type Paso = 1 | 2 | 3 | 4;
 const PASOS = ["Convocatoria", "Entrevista", "Chequeo", "Pago", "Tu proyecto"];
@@ -284,6 +285,7 @@ function PasoEntrevista({
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error ?? "No pudimos hacer el chequeo.");
+      trackEvent("Lead", "fondo-listo-chequeo");
       onResultado(data);
     } catch (e) {
       setError(e instanceof Error ? e.message : "No pudimos hacer el chequeo.");
@@ -432,6 +434,7 @@ function PasoChequeo({
   const [error, setError] = useState("");
 
   async function pagar(plan: PlanId) {
+    trackEvent("InitiateCheckout", `fondo-listo-${plan}`, { value: PLANES[plan].precio, currency: "UYU" });
     setPagando(plan);
     setError("");
     onPagar();
